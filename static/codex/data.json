@@ -1,0 +1,115 @@
+{
+    "project": {
+        "name": "rabbitmq-client",
+        "description": "Node.js RabbitMQ Client.",
+        "version": "3.2.0",
+        "url": "http://github.com/UsabilityDynamics/node-rabbitmq-client",
+        "logo": "http://media.usabilitydynamics.com/logo.png"
+    },
+    "files": {
+        "lib/rabbitmq-client.js": {
+            "name": "lib/rabbitmq-client.js",
+            "modules": {},
+            "classes": {
+                "RabbitMQ": 1
+            },
+            "fors": {
+                "RabbitMQ": 1
+            },
+            "namespaces": {}
+        },
+        "lib/utility.js": {
+            "name": "lib/utility.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "RabbitMQ": {
+            "name": "RabbitMQ",
+            "shortname": "RabbitMQ",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "lib/rabbitmq-client.js",
+            "line": 1,
+            "description": "RabbitMQ",
+            "is_constructor": 1,
+            "version": "3.2.0"
+        }
+    },
+    "classitems": [
+        {
+            "file": "lib/rabbitmq-client.js",
+            "line": 12,
+            "description": "Instance Properties",
+            "class": "RabbitMQ"
+        },
+        {
+            "file": "lib/rabbitmq-client.js",
+            "line": 18,
+            "description": "Some Actions",
+            "class": "RabbitMQ"
+        },
+        {
+            "file": "lib/rabbitmq-client.js",
+            "line": 32,
+            "description": "Constructor Properties",
+            "class": "RabbitMQ"
+        },
+        {
+            "file": "lib/rabbitmq-client.js",
+            "line": 38,
+            "description": "Create Instance",
+            "class": "RabbitMQ"
+        },
+        {
+            "file": "lib/utility.js",
+            "line": 1,
+            "description": "RabbitMQ Client Utility Methods",
+            "is_constructor": 1,
+            "class": ""
+        },
+        {
+            "file": "lib/utility.js",
+            "line": 12,
+            "description": "Some Utility Method",
+            "class": ""
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: version",
+            "line": " lib/rabbitmq-client.js:1"
+        },
+        {
+            "message": "Missing item type\nInstance Properties",
+            "line": " lib/rabbitmq-client.js:12"
+        },
+        {
+            "message": "Missing item type\nSome Actions",
+            "line": " lib/rabbitmq-client.js:18"
+        },
+        {
+            "message": "Missing item type\nConstructor Properties",
+            "line": " lib/rabbitmq-client.js:32"
+        },
+        {
+            "message": "Missing item type\nCreate Instance",
+            "line": " lib/rabbitmq-client.js:38"
+        },
+        {
+            "message": "Missing item type\nRabbitMQ Client Utility Methods",
+            "line": " lib/utility.js:1"
+        },
+        {
+            "message": "Missing item type\nSome Utility Method",
+            "line": " lib/utility.js:12"
+        }
+    ]
+}

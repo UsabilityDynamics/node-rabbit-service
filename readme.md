@@ -1,24 +1,63 @@
 Node.js RabbitMQ Client.
 
 ## Getting Started
-Install the module with: `npm install rabbitmq-client`
+Install the module with: `npm install rabbitmq-client -g`
 
 ```javascript
-var rabbitmq_client = require('rabbitmq-client');
-rabbitmq_client.awesome(); // "awesome"
+
+// Start Service using default settings
+require( 'rabbitmq-client' ).startService( function Service() {
+  this.log( 'RabbitMQ Service started.' );
+
+  // Triggered on errors
+  this.on( 'error', function error_handler( error ) {
+   console.log( 'An error occured: [%s]', error.message );
+  });
+
+  // Triggered when ready
+  this.on( 'ready', function ready( error, message ) {
+    console.log( error ? 'An error occured: [' + error.message + ']' : 'RabbitMQ Client started successfully' );
+  });
+
+});
+
 ```
 
-## Documentation
-_(Coming soon)_
+## Constructor Methods
+Typically the RabbitMQ Client will be started using the `startService()` method, which is nothing more but a shortcut
+to the instantiator. After instantiation the prototypal methods can be used within the constructor's callback to
+interact with the created service such as creating Jobs and Workers or defining Exchanges and Queues.
 
-## Examples
-_(Coming soon)_
+However, Service creation can be bypassed protoypal methods may be accessed directly.
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+ - startService( [conf], [cb] ): Creates a new instance of RabbitMQ Client using default configuration from package.json
+ - createClient( conf, cb ): Creates a new Connection. This is done automatically when service is started.
+ - createConsumer( conf, [cb] ):
+ - createProducer( conf, [cb] ):
+ - configure( [fn] ): A simple way of adding a method to be called once the Service is started.
 
-## Release History
-_(Nothing yet)_
+## Service Instance Methods
+
+ - createClient()
+ - registerJob( name, [cb] ):
+ - runJob( name, [cb] ):
+ - log()
+ - debug()
+ - get( key )
+ - set( key, value )
+ - manage( key, value, [cb] )
+ - on( event, [cb] )
+ - off( event, [cb] )
+ - emit( event, [args...] )
+
+## Command Line Usage
+When the Node.js module is installed globally using NPM several CLI commands become available.
+If the module was not installed globally you may run `npm link` from within the module.
+
+ - rabbitmq-client-start: Start RabbitMQ Client using default settings extended by command-line arguments.
+ - rabbitmq-client-stop: Stop currently running instance of RabbitMQ Client and RabbitMQ.
+ - rabbitmq-client-restart: Restarts currently running instance of RabbitMQ Client and RabbitMQ.
+ - rabbitmq-client-console: Enable console for interfacing with an instance.
 
 ## License
 

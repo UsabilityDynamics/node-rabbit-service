@@ -1,0 +1,190 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>doc</title>
+    <style>
+      /*github.com style (c) Vasily Polovnyov <vast@whiteants.net>*/
+      pre code {
+        display: block; padding: 0.5em;
+        color: #333;
+        background: #f8f8ff
+      }
+      pre .comment,
+      pre .template_comment,
+      pre .diff .header,
+      pre .javadoc {
+        color: #998;
+        font-style: italic
+      }
+      pre .keyword,
+      pre .css .rule .keyword,
+      pre .winutils,
+      pre .javascript .title,
+      pre .nginx .title,
+      pre .subst,
+      pre .request,
+      pre .status {
+        color: #333;
+        font-weight: bold
+      }
+      pre .number,
+      pre .hexcolor,
+      pre .ruby .constant {
+        color: #099;
+      }
+      pre .string,
+      pre .tag .value,
+      pre .phpdoc,
+      pre .tex .formula {
+        color: #d14
+      }
+      pre .title,
+      pre .id {
+        color: #900;
+        font-weight: bold
+      }
+      pre .javascript .title,
+      pre .lisp .title,
+      pre .clojure .title,
+      pre .subst {
+        font-weight: normal
+      }
+      pre .class .title,
+      pre .haskell .type,
+      pre .vhdl .literal,
+      pre .tex .command {
+        color: #458;
+        font-weight: bold
+      }
+      pre .tag,
+      pre .tag .title,
+      pre .rules .property,
+      pre .django .tag .keyword {
+        color: #000080;
+        font-weight: normal
+      }
+      pre .attribute,
+      pre .variable,
+      pre .lisp .body {
+        color: #008080
+      }
+      pre .regexp {
+        color: #009926
+      }
+      pre .class {
+        color: #458;
+        font-weight: bold
+      }
+      pre .symbol,
+      pre .ruby .symbol .string,
+      pre .lisp .keyword,
+      pre .tex .special,
+      pre .prompt {
+        color: #990073
+      }
+      pre .built_in,
+      pre .lisp .title,
+      pre .clojure .built_in {
+        color: #0086b3
+      }
+      pre .preprocessor,
+      pre .pi,
+      pre .doctype,
+      pre .shebang,
+      pre .cdata {
+        color: #999;
+        font-weight: bold
+      }
+      pre .deletion {
+        background: #fdd
+      }
+      pre .addition {
+        background: #dfd
+      }
+      pre .diff .change {
+        background: #0086b3
+      }
+      pre .chunk {
+        color: #aaa
+      }
+    </style>
+  </head>
+  <body>  
+    <p>Node.js RabbitMQ Client.</p>
+<h2>Getting Started</h2>
+<p>Install the module with: <code>npm install rabbitmq-client -g</code></p>
+<pre><code class="lang-javascript">
+// Start Service using default settings
+require( &#39;rabbitmq-client&#39; ).startService( function Service() {
+  this.log( &#39;RabbitMQ Service started.&#39; );
+
+  // Triggered on errors
+  this.on( &#39;error&#39;, function error_handler( error ) {
+   console.log( &#39;An error occured: [%s]&#39;, error.message );
+  });
+
+  // Triggered when ready
+  this.on( &#39;ready&#39;, function ready( error, message ) {
+    console.log( error ? &#39;An error occured: [&#39; + error.message + &#39;]&#39; : &#39;RabbitMQ Client started successfully&#39; );
+  });
+
+});</code></pre>
+<h2>Constructor Methods</h2>
+<p>Typically the RabbitMQ Client will be started using the <code>startService()</code> method, which is nothing more but a shortcut
+to the instantiator. After instantiation the prototypal methods can be used within the constructor&#39;s callback to
+interact with the created service such as creating Jobs and Workers or defining Exchanges and Queues.</p>
+<p>However, Service creation can be bypassed protoypal methods may be accessed directly.</p>
+<ul>
+<li>startService( [conf], [cb] ): Creates a new instance of RabbitMQ Client using default configuration from package.json</li>
+<li>createClient( conf, cb ): Creates a new Connection. This is done automatically when service is started.</li>
+<li>createConsumer( conf, [cb] ):</li>
+<li>createProducer( conf, [cb] ):</li>
+<li>configure( [fn] ): A simple way of adding a method to be called once the Service is started.</li>
+</ul>
+<h2>Service Instance Methods</h2>
+<ul>
+<li>createClient()</li>
+<li>registerJob( name, [cb] ):</li>
+<li>runJob( name, [cb] ):</li>
+<li>log()</li>
+<li>debug()</li>
+<li>get( key )</li>
+<li>set( key, value )</li>
+<li>manage( key, value, [cb] )</li>
+<li>on( event, [cb] )</li>
+<li>off( event, [cb] )</li>
+<li>emit( event, [args...] )</li>
+</ul>
+<h2>Command Line Usage</h2>
+<p>When the Node.js module is installed globally using NPM several CLI commands become available.
+If the module was not installed globally you may run <code>npm link</code> from within the module.</p>
+<ul>
+<li>rabbitmq-client-start: Start RabbitMQ Client using default settings extended by command-line arguments.</li>
+<li>rabbitmq-client-stop: Stop currently running instance of RabbitMQ Client and RabbitMQ.</li>
+<li>rabbitmq-client-restart: Restarts currently running instance of RabbitMQ Client and RabbitMQ.</li>
+<li>rabbitmq-client-console: Enable console for interfacing with an instance.</li>
+</ul>
+<h2>License</h2>
+<p>(The MIT License)</p>
+<p>Copyright (c) 2013 Usability Dynamics, Inc. &lt;info@usabilitydynamics.com&gt;</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+&#39;Software&#39;), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &#39;AS IS&#39;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OT</p>
+
+  </body>
+</html>

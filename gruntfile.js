@@ -17,7 +17,7 @@ module.exports = function( grunt ) {
         reporter: 'list',
         ui: 'exports'
       },
-      all: [ 'test/*.js' ]
+      all: [ './test/*.js' ]
     },
 
     yuidoc: {
@@ -38,7 +38,7 @@ module.exports = function( grunt ) {
       options: {
         inputDirectory: 'lib',
         outputDirectory: './static/lib-cov',
-        highlight: true
+        highlight: false
       }
     },
 
@@ -63,8 +63,6 @@ module.exports = function( grunt ) {
         }
         ],
         options: {
-          // preCompile: function preCompile( src, context ) {},
-          // postCompile: function postCompile( src, context ) {},
           templateContext: {},
           markdownOptions: {
             highlight: 'manual',
@@ -78,11 +76,28 @@ module.exports = function( grunt ) {
       }
     },
 
-    clean: [],
+    clean: {
+      build: [ ".dynamic", '.DS_Store' ],
+      release: [ ".dynamic", '.DS_Store' ]
+    },
 
     shell: {
-      install: {},
-      update: {}
+      install: {
+        options: { stdout: true },
+        command: 'bash bin/bash/install.sh'
+      },
+      publish: {
+        options: { stdout: true },
+        command: 'bash bin/bash/publish.sh'
+      },
+      push: {
+        options: { stdout: true },
+        command: 'git add . && git commit -m "Automatic push." && git commit'
+      },
+      pull: {
+        options: { stdout: true },
+        command: [ 'git pull', 'grunt install' ]
+      }
     }
 
   });
@@ -99,10 +114,10 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( 'grunt-shell' );
 
   // Build Assets
-  grunt.registerTask( 'default', [ 'markdown', 'yuidoc', 'jscoverage', 'mochacli' ] );
+  grunt.registerTask( 'default', [ 'markdown', 'yuidoc', 'mochacli' ] );
 
   // Install environment
-  grunt.registerTask( 'install', [ 'shell:pull', 'shell:install', 'yuidoc'  ] );
+  grunt.registerTask( 'install', [ 'shell:install', 'yuidoc'  ] );
 
   // Update Environment
   grunt.registerTask( 'update', [ 'shell:pull', 'shell:update', 'yuidoc'   ] );
@@ -114,7 +129,7 @@ module.exports = function( grunt ) {
   grunt.registerTask( 'doc', [ 'yuidoc', 'markdown' ] );
 
   // Run Tests
-  grunt.registerTask( 'test', [ 'mochacli' ] );
+  grunt.registerTask( 'test', [ 'jscoverage', 'mochacli' ] );
 
   // Developer Mode
   grunt.registerTask( 'dev', [ 'watch' ] );

@@ -1,5 +1,5 @@
 /**
- * RabbitMQ Client API Tests
+ * RabbitMQ Basic Example Test
  *
  *
  */

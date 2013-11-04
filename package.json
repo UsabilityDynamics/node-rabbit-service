@@ -43,11 +43,12 @@
     "node": ">=0.10.21"
   },
   "dependencies": {
-    "rabbit": "0.1.0",
+    "auto": "auto",
     "commander": "2.0.0",
-    "auto": "UsabilityDynamics/node-auto",
-    "object-settings": "UsabilityDynamics/node-object-settings",
-    "object-emitter": "UsabilityDynamics/node-object-emitter"
+    "rabbit": "0.1.0",
+    "object-emitter": "*",
+    "object-settings": "*",
+    "object-validation": "*"
   },
   "devDependencies": {
     "grunt-markdown": "~0.4.0",
@@ -60,6 +61,7 @@
     "grunt-contrib-clean": "*",
     "grunt-jscoverage": "0.0.3",
     "grunt-shell": "*",
+    "express": "*",
     "mocha": "*",
     "should": "*",
     "grunt": "~0.4.1"
