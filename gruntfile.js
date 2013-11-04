@@ -92,7 +92,7 @@ module.exports = function( grunt ) {
       },
       push: {
         options: { stdout: true },
-        command: 'git add . && git commit -m "Automatic push." && git commit'
+        command: 'git add . && git commit -m "Automatic push." && git push'
       },
       pull: {
         options: { stdout: true },
