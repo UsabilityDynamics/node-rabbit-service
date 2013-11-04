@@ -1,8 +1,29 @@
 {
   "name": "rabbitmq-client",
   "description": "Node.js RabbitMQ Client.",
-  "version": "0.1.0",
+  "version": "3.2.0",
+  "keywords": [
+    "node",
+    "module"
+  ],
   "homepage": "http://github.com/UsabilityDynamics/node-rabbitmq-client",
+  "config": {},
+  "directories": {
+    "doc": "./static/codex",
+    "examples": "./examples",
+    "bin": "./bin",
+    "lib": "./lib",
+    "vendor": "./vendor"
+  },
+  "bin": {
+    "rabbitmq-client-start": "./bin/rabbitmq-client-start.js",
+    "rabbitmq-client-stop": "./bin/rabbitmq-client-stop.js",
+    "rabbitmq-client-console": "./bin/rabbitmq-client-console.js"
+  },
+  "scripts": {
+    "install": "bash bin/shell/install.sh",
+    "publish": "bash bin/shell/install.sh"
+  },
   "author": {
     "name": "Usability Dynamics",
     "email": "info@UsabilityDynamics.com",
@@ -22,6 +43,8 @@
     "node": ">=0.10.21"
   },
   "dependencies": {
+    "rabbit": "0.1.0",
+    "commander": "2.0.0",
     "auto": "UsabilityDynamics/node-auto",
     "object-settings": "UsabilityDynamics/node-object-settings",
     "object-emitter": "UsabilityDynamics/node-object-emitter"
@@ -40,9 +63,5 @@
     "mocha": "*",
     "should": "*",
     "grunt": "~0.4.1"
-  },
-  "keywords": [
-    "node",
-    "module"
-  ]
+  }
 }
