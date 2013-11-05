@@ -109,7 +109,11 @@ module.exports = {
         prototype.should.have.property( 'get' );
         prototype.should.have.property( 'set' );
 
-        //done();
+        this.on( 'service.ready', function() {
+
+          done();
+
+        });
 
       }
 

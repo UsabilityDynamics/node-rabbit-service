@@ -1,6 +1,6 @@
-Node.js RabbitMQ Client.
+Node.js RabbitMQ Service.
 
- - Starts or stops a RabbitMQ Server.
+ - Starts or stops a RabbitMQ Service.
  - Provides a programmatic API for managing a RabbitMQ instance.
  - Exposes a programmatic client for managing exchanges and queues.
  - Includes [Rabbit](https://github.com/UsabilityDynamics/node-rabbit-client) for processing distributed jobs.
@@ -23,7 +23,7 @@ require( 'rabbitmq-client' ).startService( function Service() {
 
   // Triggered when ready
   this.on( 'ready', function ready( error, message ) {
-    console.log( error ? 'An error occured: [' + error.message + ']' : 'RabbitMQ Client started successfully' );
+    console.log( error ? 'An error occured: [' + error.message + ']' : 'RabbitMQ Service started successfully' );
   });
 
 });
@@ -31,13 +31,13 @@ require( 'rabbitmq-client' ).startService( function Service() {
 ```
 
 ## Constructor Methods
-Typically the RabbitMQ Client will be started using the `startService()` method, which is nothing more but a shortcut
+Typically the RabbitMQ Service will be started using the `startService()` method, which is nothing more but a shortcut
 to the instantiator. After instantiation the prototypal methods can be used within the constructor's callback to
 interact with the created service such as creating Jobs and Workers or defining Exchanges and Queues.
 
 However, Service creation can be bypassed protoypal methods may be accessed directly.
 
- - startService( [conf], [cb] ): Creates a new instance of RabbitMQ Client using default configuration from package.json
+ - startService( [conf], [cb] ): Creates a new instance of RabbitMQ Service using default configuration from package.json
  - createClient( conf, cb ): Creates a new Connection. This is done automatically when service is started.
  - createConsumer( conf, [cb] ):
  - createProducer( conf, [cb] ):
@@ -59,23 +59,28 @@ However, Service creation can be bypassed protoypal methods may be accessed dire
 
 ## Service Instance Events
 
- - connection
- - connection:success
- - connection:error
- - error
+ - service.started
+ - service.error
 
 ## Command Line Usage
 When the Node.js module is installed globally using NPM several CLI commands become available.
 If the module was not installed globally you may run `npm link` from within the module.
 
- - rabbitmq-client-start: Start RabbitMQ Client using default settings extended by command-line arguments.
- - rabbitmq-client-stop: Stop currently running instance of RabbitMQ Client and RabbitMQ.
+ - rabbitmq-client-start: Start RabbitMQ Service using default settings extended by command-line arguments.
+ - rabbitmq-client-stop: Stop currently running instance of RabbitMQ Service and RabbitMQ.
  - rabbitmq-client-status: Get status of service - used to check if running.
- - rabbitmq-client-restart: Restarts currently running instance of RabbitMQ Client and RabbitMQ.
+ - rabbitmq-client-restart: Restarts currently running instance of RabbitMQ Service and RabbitMQ.
  - rabbitmq-client-console: Enable console for interfacing with an instance.
+ - rabbitmq-client-install: Daemonize RabbitMQ Service.
 
 ## Schemas
 The schemas are stored in static/schemas and are used for various things, most importantly validation of settings.
+
+## Development
+
+ - grunt build
+ - grunt clean:build
+ - grunt clean:release
 
 ## License
 

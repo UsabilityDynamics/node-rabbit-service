@@ -77,14 +77,26 @@ module.exports = function( grunt ) {
     },
 
     clean: {
-      build: [ ".dynamic", '.DS_Store' ],
-      release: [ ".dynamic", '.DS_Store' ]
+      build: [
+        ".dynamic/pid",
+        ".dynamic/cache",
+        ".dynamic/logs",
+        '.DS_Store'
+      ],
+      release: [
+        ".dynamic",
+        '.DS_Store'
+      ]
     },
 
     shell: {
       install: {
         options: { stdout: true },
         command: 'bash bin/bash/install.sh'
+      },
+      update: {
+        options: { stdout: true },
+        command: 'bash bin/bash/update.sh'
       },
       publish: {
         options: { stdout: true },
