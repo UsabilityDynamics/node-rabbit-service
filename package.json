@@ -1,6 +1,6 @@
 {
   "name": "rabbit-service",
-  "description": "Node.js RabbitMQ Client.",
+  "description": "Node.js RabbitMQ Service. We service rabbits.",
   "version": "3.2.0",
   "config": {
     "name": "node-rabbit",
@@ -68,30 +68,26 @@
   ],
   "main": "lib/rabbit-service.js",
   "dependencies": {
-    "auto": "0.0.2",
-    "abstract": "0.0.8",
-    "commander": "2.0.0",
-    "rabbit": "0.0.5",
-    "object-emitter": "0.0.5",
-    "object-settings": "0.0.6",
-    "object-validation": "0.0.3",
-    "winston": "0.7.2"
+    "auto": ">=0.0.2",
+    "abstract": ">=0.0.8",
+    "commander": ">=2.0.0",
+    "rabbit-client": "git+ssh://git@github.com:UsabilityDynamics/node-rabbit-client#master",
+    "object-emitter": ">=0.0.5",
+    "object-settings": ">=0.0.6",
+    "object-validation": ">=0.0.3",
+    "winston": ">=0.7.2"
   },
   "devDependencies": {
+    "grunt-contrib-symlink": "~0.2.0",
+    "grunt-contrib-yuidoc": "~0.5.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-less": "~0.8.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-jscoverage": "~0.0.3",
     "grunt-markdown": "~0.4.0",
-    "grunt-contrib-symlink": "*",
     "grunt-mocha-cli": "~1.3.0",
-    "grunt-contrib-yuidoc": "*",
-    "grunt-contrib-watch": "*",
-    "grunt-contrib-less": "*",
-    "grunt-contrib-concat": "*",
-    "grunt-contrib-clean": "*",
-    "grunt-jscoverage": "0.0.3",
-    "grunt-shell": "*",
-    "express": "*",
-    "mocha": "~1.13.0",
-    "should": "*",
-    "grunt": "~0.4.1"
+    "grunt-shell": "~0.5.0"
   },
   "repository": {
     "url": "git@github.com:UsabilityDynamics/node-rabbit-service.git",

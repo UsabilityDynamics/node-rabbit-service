@@ -69,10 +69,10 @@ module.exports = {
       // require.resolve( 'rabbitmq-service-stop' );
 
       // Check resolution
-      require.resolve( 'rabbitmq-service' );
-      require.resolve( 'rabbitmq-service/bin/rabbitmq-service-stop.js' );
-      require.resolve( 'rabbitmq-service/bin/rabbitmq-service-console.js' );
-      require.resolve( 'rabbitmq-service/bin/rabbitmq-service-start.js' );
+      // require.resolve( 'rabbitmq-service' );
+      // require.resolve( 'rabbitmq-service/bin/rabbitmq-service-stop.js' );
+      // require.resolve( 'rabbitmq-service/bin/rabbitmq-service-console.js' );
+      // require.resolve( 'rabbitmq-service/bin/rabbitmq-service-start.js' );
 
     },
 
