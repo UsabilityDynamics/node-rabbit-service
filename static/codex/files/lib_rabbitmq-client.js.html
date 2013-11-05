@@ -107,6 +107,12 @@
 function RabbitMQ() {
   this.debug( &#x27;Creating service with [%s].&#x27;, &#x27;function&#x27; === typeof child ? child.name : typeof child );
 
+  // Make sure context is correct otherwise we could screw up the global scope.
+  if( !( this instanceof RabbitMQ ) ) {
+    return new RabbitMQ( arguments[0], arguments[1] );
+  }
+
+  var path      = require( &#x27;path&#x27; );
   var settings  = &#x27;object&#x27; === typeof arguments[0] ? arguments[0] : {};
   var callback  = &#x27;function&#x27; === typeof arguments[1] ? arguments[1] : RabbitMQ.utility.noop;
   var self      = this;
@@ -119,61 +125,87 @@ function RabbitMQ() {
     // Until the callback is instantiated we refere to its prototype
     self = callback.prototype;
 
+    // Mixins.
     RabbitMQ.utility.emitter.mixin( self);
-    RabbitMQ.utility.settings.mixin( self  );
+    RabbitMQ.utility.settings.mixin( self );
 
-    // Extend settings with defaults
-    self.set( &#x27;settings&#x27;, RabbitMQ.utility.defaults( settings, require( &#x27;../package&#x27; ).config ) );
+    // Instante Settings.
+    self.set({
+      settings: RabbitMQ.utility.defaults( settings, require( &#x27;../package&#x27; ).config ),
+      module_root: path.dirname( path.dirname( module.filename ) ),
+      distribution: &#x27;rabbitmq-3.2.0-mac&#x27;
+    });
+
+    // Computed Settings.
+    self.set({
+      id: RabbitMQ.utility.hash( settings ),
+      name: [ self.get( &#x27;settings.name&#x27; ), self.get( &#x27;settings.hostname&#x27;, &#x27;localhost&#x27; ) ].join( &#x27;@&#x27; ),
+      bin: {
+        ctl: RabbitMQ.utility.realpath( self.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, self.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmqctl&quot; ),
+        defaults: RabbitMQ.utility.realpath( self.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, self.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmq-defaults&quot; ),
+        env: RabbitMQ.utility.realpath( self.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, self.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmq-env&quot; ),
+        plugins: RabbitMQ.utility.realpath( self.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, self.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmq-plugins&quot; ),
+        server: RabbitMQ.utility.realpath( self.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, self.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmq-server&quot; )
+      }
+    });
 
     // Compute absolute paths to directories
     RabbitMQ.utility.each( self.get( &#x27;settings.directories&#x27; ), function( value, key ) {
-      self.set( &#x27;settings.directories.&#x27; + key, RabbitMQ.utility.realpath( value ) || RabbitMQ.utility.realpath( &#x27;../.dynamic/&#x27; + key ) )
+      self.set( &#x27;settings.directories.&#x27; + key, RabbitMQ.utility.realpath( value ) || RabbitMQ.utility.absolute_path( &#x27;../.dynamic/&#x27; + key, self.get( &#x27;module_root&#x27; ) ) )
+    });
+
+    // Compute absolute paths to directories
+    RabbitMQ.utility.each( self.get( &#x27;settings.bin&#x27; ), function( value, key ) {
+      self.set( &#x27;settings.bin.&#x27; + key, RabbitMQ.utility.realpath( value ) || RabbitMQ.utility.absolute_path( &#x27;../.dynamic/&#x27; + key, self.get( &#x27;module_root&#x27; ) ) )
     });
 
     // Validate Settings
     self.set( &#x27;validation&#x27;, RabbitMQ.utility.validate( self.get( &#x27;settings&#x27; ), RabbitMQ._schemas.service ) );
-
-    // Prepare PID
-    self.set( &#x27;pid&#x27;, undefined );
 
     // Validate Settings
     if( !self.get( &#x27;validation&#x27; ).is_valid ) {
       throw new Error( &#x27;Validation Failure: &#x27; + validation.errors.join() );
     }
 
-    // Generate Instance ID from settings
-    self.set( &#x27;id&#x27;, RabbitMQ.utility.hash( self.get( &#x27;settings&#x27; ) ) );
-
     // Instantaite the callback
-    self = RabbitMQ._instance[ self.get( &#x27;id&#x27; ) ] = new callback( null, self );
+    self = new callback( null, self );
 
-    self.process = RabbitMQ.utility.spawn( &#x27;ls&#x27;, [], {
+    // Spawn RabbitMQ Server Process.
+    self.process = RabbitMQ.utility.spawn( self.get( &#x27;bin.server&#x27; ), [ &quot;_detached&quot; ], {
       cwd: process.cwd(),
-      env: process.env,
+      env: RabbitMQ.utility.extend( {}, process.env, {
+        RABBITMQ_CONFIG_FILE: self.get( &#x27;settings.directories.config&#x27; ) + &#x27;/rabbitmq&#x27;,
+        RABBITMQ_PID_FILE: self.get( &#x27;settings.directories.pid&#x27; ) + &#x27;/rabbitmq&#x27;,
+        RABBITMQ_NODE_PORT: self.get( &#x27;settings.port&#x27; ),
+        RABBITMQ_NODE_IP_ADDRESS: self.get( &#x27;settings.host&#x27; ),
+        RABBITMQ_NODENAME: self.get( &#x27;name&#x27; ),
+        RABBITMQ_LOG_BASE: self.get( &#x27;settings.directories.logs&#x27; )
+      }),
       detached: false
     });
 
     // Try to parse JSON, Output Data
     self.process.stdout.on( &#x27;data&#x27;, function( data ) {
-      self.log( &#x27;data&#x27;, data.toString() );
+      self.log( &#x27;DATA:&#x27;, data.toString() );
     });
 
     // Try to parse JSON, Output Error
     self.process.stderr.on( &#x27;data&#x27;, function( data ) {
-      self.log( &#x27;error&#x27;, data.toString() );
+      self.log( &#x27;ERROR:&#x27;, data.toString() );
     });
 
-    // Set PID
-    self.set( &#x27;pid&#x27;, self.process.pid );
+    // Update settings after process spawned.
+    self.set( &#x27;process&#x27;, RabbitMQ.utility.pick( self.process, &#x27;pid&#x27;, &#x27;connected&#x27; ) );
 
-    // @chainable
-    return self;
+    // Save instance.
+    RabbitMQ._instance[ self.get( &#x27;settings.name&#x27; ) ] = self;
 
   } catch( error ) {
     console.error( error.message );
     return self;
   }
 
+  // @chainable
   return self;
 
 }
@@ -205,6 +237,30 @@ Object.defineProperties( RabbitMQ.prototype, {
      * @for RabbitMQ.prototype
      */
     value: require( &#x27;debug&#x27; )( &#x27;rabbitmq:lient&#x27; ),
+    enumerable: true
+  },
+  createProducer: {
+    /**
+     * Create Client
+     *
+     * @method createClient
+     * @for RabbitMQ.prototype
+     */
+    value: function createClient() {
+
+    },
+    enumerable: true
+  },
+  createConsumer: {
+    /**
+     * Create Client
+     *
+     * @method createClient
+     * @for RabbitMQ.prototype
+     */
+    value: function createClient() {
+
+    },
     enumerable: true
   },
   createClient: {
@@ -379,6 +435,8 @@ Object.defineProperties( module.exports = RabbitMQ, {
     writable: true
   }
 });
+
+
     </pre>
 </div>
 

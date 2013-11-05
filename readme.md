@@ -1,5 +1,12 @@
 Node.js RabbitMQ Client.
 
+ - Starts or stops a RabbitMQ Server.
+ - Provides a programmatic API for managing a RabbitMQ instance.
+ - Exposes a programmatic client for managing exchanges and queues.
+ - Includes [Rabbit](https://github.com/UsabilityDynamics/node-rabbit-client) for processing distributed jobs.
+ - Can be used as a daemonized RabbitMQ service handler.
+ - Modular structure for easy prototypal extension.
+
 ## Getting Started
 Install the module with: `npm install rabbitmq-client -g`
 
@@ -63,6 +70,7 @@ If the module was not installed globally you may run `npm link` from within the 
 
  - rabbitmq-client-start: Start RabbitMQ Client using default settings extended by command-line arguments.
  - rabbitmq-client-stop: Stop currently running instance of RabbitMQ Client and RabbitMQ.
+ - rabbitmq-client-status: Get status of service - used to check if running.
  - rabbitmq-client-restart: Restarts currently running instance of RabbitMQ Client and RabbitMQ.
  - rabbitmq-client-console: Enable console for interfacing with an instance.
 

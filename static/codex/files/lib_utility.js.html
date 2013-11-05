@@ -103,8 +103,38 @@ var Utility = require( &#x27;abstract&#x27; ).utility;
  *
  */
 Object.defineProperties( module.exports = Utility, {
+  absolute_path: {
+    /**
+     * Use Parent Module&#x27;s Path
+     *
+     * @param target
+     * @param current
+     * @returns {*|String}
+     */
+    value: function resolve( target, current ) {
+
+      var direname = require( &#x27;path&#x27; ).dirname;
+      var path = require( &#x27;path&#x27; ).resolve( target, current || &#x27;.&#x27; );
+
+      current = current || direname( current || module.parent.filename ) || &#x27;.&#x27;;
+
+      var resolved = require( &#x27;path&#x27; ).resolve( target, current );
+
+      return resolved;
+
+    },
+    configurable: false,
+    enumerable: true,
+    writable: true
+  },
   spawn: {
     value: require( &#x27;child_process&#x27; ).spawn,
+    configurable: false,
+    enumerable: true,
+    writable: true
+  },
+  pick: {
+    value: require( &#x27;lodash&#x27; ).pick,
     configurable: false,
     enumerable: true,
     writable: true

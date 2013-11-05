@@ -3,16 +3,28 @@
   "description": "Node.js RabbitMQ Client.",
   "version": "3.2.0",
   "config": {
-    "port": 8000,
+    "name": "node-rabbit",
+    "port": 5672,
     "host": "127.0.0.1",
+    "exchange": "",
+    "identify": "rabbitmq-client",
     "directories": {
+      "config": "static/etc",
       "cache": ".dynamic/cache",
+      "pid": ".dynamic/pid",
       "logs": ".dynamic/logs"
     },
     "default_user": "guest",
     "default_password": "guest",
     "default_vhost": "/",
-    "cluster_nodes": []
+    "cluster_nodes": [],
+    "management": {
+      "http_log_dir": ".dynamic/logs",
+      "port": 15672,
+      "host": "127.0.0.1"
+    },
+    "defaultExchangeName": "",
+    "reconnect": true
   },
   "directories": {
     "doc": "./static/codex",
@@ -24,13 +36,18 @@
   "bin": {
     "rabbitmq-client-start": "./bin/rabbitmq-client-start.js",
     "rabbitmq-client-stop": "./bin/rabbitmq-client-stop.js",
+    "rabbitmq-client-status": "./bin/rabbitmq-client-status.js",
     "rabbitmq-client-restart": "./bin/rabbitmq-client-restart.js",
     "rabbitmq-client-console": "./bin/rabbitmq-client-console.js"
   },
   "scripts": {
-    "install": "bash bin/shell/install.sh",
-    "publish": "bash bin/shell/install.sh"
+    "install": "bash bin/bash/install.sh",
+    "pretest": "bash bin/bash/pretest.sh",
+    "posttest": "bash bin/bash/posttest.sh",
+    "update": "bash bin/bash/update.sh",
+    "publish": "bash bin/bash/install.sh"
   },
+  "preferGlobal": true,
   "keywords": [
     "rabbitmq",
     "amqp"
@@ -52,13 +69,14 @@
   ],
   "main": "lib/rabbitmq-client.js",
   "dependencies": {
-    "auto": "auto",
-    "winston": "0.7.2",
+    "auto": "0.0.2",
+    "abstract": "0.0.8",
     "commander": "2.0.0",
-    "rabbit": "0.1.0",
-    "object-emitter": "*",
-    "object-settings": "*",
-    "object-validation": "*"
+    "rabbit": "0.0.5",
+    "object-emitter": "0.0.5",
+    "object-settings": "0.0.6",
+    "object-validation": "0.0.3",
+    "winston": "0.7.2"
   },
   "devDependencies": {
     "grunt-markdown": "~0.4.0",
@@ -75,6 +93,10 @@
     "mocha": "*",
     "should": "*",
     "grunt": "~0.4.1"
+  },
+  "repository": {
+    "url": "git@github.com:UsabilityDynamics/node-rabbitmq-client.git",
+    "type": "git"
   },
   "engines": {
     "node": ">=0.10.21"

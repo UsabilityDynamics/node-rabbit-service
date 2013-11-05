@@ -83,6 +83,8 @@ module.exports = {
     // Try to start the service
     "can start service.": function( done ) {
 
+      this.timeout( 10000 );
+
       /**
        * Defnes custom service handler
        *
@@ -107,12 +109,13 @@ module.exports = {
         prototype.should.have.property( 'get' );
         prototype.should.have.property( 'set' );
 
-        done();
+        //done();
 
       }
 
       var service = require( '../' ).startService({
-        "port": 1200,
+        "name": "rabbit-test",
+        "port": 1300,
         "default_vhost": "/test"
       }, serviceHandler );
 
@@ -121,8 +124,8 @@ module.exports = {
       service.should.have.property( 'set' );
       service.should.have.property( 'log' );
       service.should.have.property( 'debug' );
-      // service.should.have.property( 'createProducer' );
-      // service.should.have.property( 'createConsumer' );
+      service.should.have.property( 'createProducer' );
+      service.should.have.property( 'createConsumer' );
       service.should.have.property( 'createClient' );
       service.should.have.property( 'registerJob' );
       service.should.have.property( 'runJob' );
@@ -133,7 +136,7 @@ module.exports = {
       service.get().should.have.ownProperty( 'id' );
       service.get().should.have.ownProperty( 'settings' );
       service.get().should.have.ownProperty( 'validation' );
-      service.get().should.have.ownProperty( 'pid' );
+      service.get( 'process' ).should.have.ownProperty( 'pid' );
 
     },
 
