@@ -93,6 +93,10 @@
 /**
  * RabbitMQ Service Constructor
  *
+ * Events
+ * - service.exit
+ * - service.starting
+ *
  * @class RabbitMQ
  * @constructor
  * @version 3.2.0
@@ -185,6 +189,13 @@ function RabbitMQ() {
       detached: false
     });
 
+    // Update settings after process spawned.
+    self.set( &#x27;process&#x27;, RabbitMQ.utility.pick( self.process, &#x27;pid&#x27;, &#x27;connected&#x27; ) );
+
+    self.process.on( &#x27;exit&#x27;, function() {
+      self.emit( &#x27;service.exit&#x27;, arguments );
+    });
+
     // Try to parse JSON, Output Data
     self.process.stdout.on( &#x27;data&#x27;, function( data ) {
       self.log( &#x27;DATA:&#x27;, data.toString() );
@@ -195,8 +206,9 @@ function RabbitMQ() {
       self.log( &#x27;ERROR:&#x27;, data.toString() );
     });
 
-    // Update settings after process spawned.
-    self.set( &#x27;process&#x27;, RabbitMQ.utility.pick( self.process, &#x27;pid&#x27;, &#x27;connected&#x27; ) );
+    process.nextTick( function() {
+      self.emit( &#x27;service.starting&#x27; );
+    });
 
     // Save instance.
     RabbitMQ._instance[ self.get( &#x27;settings.name&#x27; ) ] = self;
@@ -216,6 +228,20 @@ function RabbitMQ() {
  *
  */
 Object.defineProperties( RabbitMQ.prototype, {
+  stop: {
+    /**
+     * Log Entry
+     *
+     * @method log
+     * @uses winston
+     * @for RabbitMQ.prototype
+     */
+    value: function log() {
+      this.debug( &#x27;Stopping Service [%s].&#x27;, this.get( &#x27;process.pid&#x27; ) );
+      process.kill( this.get( &#x27;process.pid&#x27; ), &#x27;SIGHUP&#x27; );
+    },
+    enumerable: true
+  },
   log: {
     /**
      * Log Entry

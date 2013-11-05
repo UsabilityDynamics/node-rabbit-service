@@ -82,6 +82,14 @@ The schemas are stored in static/schemas and are used for various things, most i
  - grunt clean:build
  - grunt clean:release
 
+## Troubleshooting
+
+http://localhost:8070/
+
+Manually start RabbitMQ server.
+$ vendor/rabbitmq-3.2.0/sbin/rabbitmq-server
+$ vendor/rabbitmq-3.2.0-mac/sbin/rabbitmq-server
+
 ## License
 
 (The MIT License)

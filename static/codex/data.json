@@ -41,7 +41,7 @@
             "extension_for": [],
             "file": "lib/rabbitmq-service.js",
             "line": 1,
-            "description": "RabbitMQ Service Constructor",
+            "description": "RabbitMQ Service Constructor\n\nEvents\n- service.exit\n- service.starting",
             "is_constructor": 1,
             "version": "3.2.0",
             "async": 1,
@@ -90,13 +90,13 @@
     "classitems": [
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 122,
+            "line": 134,
             "description": "Instance Properties",
             "class": "RabbitMQ"
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 128,
+            "line": 140,
             "description": "Log Entry",
             "itemtype": "method",
             "name": "log",
@@ -107,7 +107,18 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 142,
+            "line": 154,
+            "description": "Log Entry",
+            "itemtype": "method",
+            "name": "log",
+            "uses": [
+                "winston"
+            ],
+            "class": "RabbitMQ.prototype"
+        },
+        {
+            "file": "lib/rabbitmq-service.js",
+            "line": 168,
             "description": "Debug Entry",
             "itemtype": "method",
             "name": "debug",
@@ -115,7 +126,7 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 152,
+            "line": 178,
             "description": "Create Client",
             "itemtype": "method",
             "name": "createClient",
@@ -123,7 +134,7 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 164,
+            "line": 190,
             "description": "Create Client",
             "itemtype": "method",
             "name": "createClient",
@@ -131,7 +142,7 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 176,
+            "line": 202,
             "description": "Create Client",
             "itemtype": "method",
             "name": "createClient",
@@ -139,7 +150,7 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 188,
+            "line": 214,
             "description": "Create Job",
             "itemtype": "method",
             "name": "registerJob",
@@ -147,7 +158,7 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 200,
+            "line": 226,
             "description": "Create Job",
             "itemtype": "method",
             "name": "registerJob",
@@ -155,7 +166,7 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 212,
+            "line": 238,
             "description": "Create Job",
             "itemtype": "method",
             "name": "registerJob",
@@ -163,7 +174,7 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 224,
+            "line": 250,
             "description": "Create Configuration Callback",
             "itemtype": "method",
             "name": "configure",
@@ -171,13 +182,13 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 237,
+            "line": 263,
             "description": "Constructor Properties",
             "class": "RabbitMQ.prototype"
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 243,
+            "line": 269,
             "description": "Create Instance",
             "itemtype": "method",
             "name": "create",
@@ -185,7 +196,7 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 255,
+            "line": 281,
             "description": "Constructor Debugger",
             "itemtype": "method",
             "name": "debug",
@@ -193,7 +204,7 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 265,
+            "line": 291,
             "description": "Destroy Instance",
             "itemtype": "method",
             "name": "create",
@@ -201,13 +212,13 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 277,
+            "line": 303,
             "description": "Utility Methods",
             "class": "RabbitMQ"
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 286,
+            "line": 312,
             "description": "Create Instance",
             "itemtype": "method",
             "name": "create",
@@ -215,7 +226,7 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 298,
+            "line": 324,
             "description": "Create Generic Client",
             "itemtype": "method",
             "name": "createClient",
@@ -223,7 +234,7 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 310,
+            "line": 336,
             "description": "Get Instance by PID",
             "itemtype": "method",
             "name": "create",
@@ -231,7 +242,7 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 322,
+            "line": 348,
             "description": "Schemas",
             "itemtype": "attribute",
             "name": "_schemas",
@@ -240,7 +251,7 @@
         },
         {
             "file": "lib/rabbitmq-service.js",
-            "line": 336,
+            "line": 362,
             "description": "Instance Map",
             "itemtype": "attribute",
             "name": "_instance",
@@ -289,15 +300,15 @@
         },
         {
             "message": "Missing item type\nInstance Properties",
-            "line": " lib/rabbitmq-service.js:122"
+            "line": " lib/rabbitmq-service.js:134"
         },
         {
             "message": "Missing item type\nConstructor Properties",
-            "line": " lib/rabbitmq-service.js:237"
+            "line": " lib/rabbitmq-service.js:263"
         },
         {
             "message": "Missing item type\nUtility Methods",
-            "line": " lib/rabbitmq-service.js:277"
+            "line": " lib/rabbitmq-service.js:303"
         },
         {
             "message": "Missing item type\nExtra Utility Methods",
