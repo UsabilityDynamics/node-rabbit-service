@@ -7,7 +7,7 @@ ln -f static/etc/enabled_plugins vendor/rabbitmq-3.2.0/etc/rabbitmq/enabled_plug
 ln -f static/etc/rabbitmq.config vendor/rabbitmq-3.2.0/etc/rabbitmq/rabbitmq-env.conf
 
 # Create Directories
-if [ ! -d ".dynamic" ];
+if [ ! -d ".dynamic" ]; then
   rm -rf .dynamic
   mkdir .dynamic
   mkdir .dynamic/pid

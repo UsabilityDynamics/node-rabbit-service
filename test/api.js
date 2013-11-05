@@ -1,11 +1,17 @@
 /**
- * RabbitMQ Client API Tests
+ * RabbitMQ Service API Tests
  *
  *
  */
 module.exports = {
 
-  "RabbitMQ Client": {
+  "RabbitMQ API": {
+
+    // Record module loading time
+    "can load module": function() {
+      this.timeout( 150 );
+      require( '../' );
+    },
 
     // Check Module Structure
     "has expected methods.": function() {
@@ -60,13 +66,13 @@ module.exports = {
       }
 
       // Check global binaries
-      // require.resolve( 'rabbitmq-client-stop' );
+      // require.resolve( 'rabbitmq-service-stop' );
 
       // Check resolution
-      require.resolve( 'rabbitmq-client' );
-      require.resolve( 'rabbitmq-client/bin/rabbitmq-client-stop.js' );
-      require.resolve( 'rabbitmq-client/bin/rabbitmq-client-console.js' );
-      require.resolve( 'rabbitmq-client/bin/rabbitmq-client-start.js' );
+      require.resolve( 'rabbitmq-service' );
+      require.resolve( 'rabbitmq-service/bin/rabbitmq-service-stop.js' );
+      require.resolve( 'rabbitmq-service/bin/rabbitmq-service-console.js' );
+      require.resolve( 'rabbitmq-service/bin/rabbitmq-service-start.js' );
 
     },
 
@@ -78,75 +84,7 @@ module.exports = {
       config.should.have.property( 'port' );
       // config.should.have.property( 'address' );
 
-    },
-
-    // Try to start the service
-    "can start service.": function( done ) {
-
-      this.timeout( 10000 );
-
-      /**
-       * Defnes custom service handler
-       *
-       * @param error
-       * @param prototype
-       */
-      function serviceHandler( error, prototype ) {
-
-        if( error ) {
-          console.log( 'serviceHandler error', error );
-        }
-
-        this.should.have.property( 'log' );
-        this.should.have.property( 'on' );
-        this.should.have.property( 'off' );
-        this.should.have.property( 'get' );
-        this.should.have.property( 'set' );
-
-        prototype.should.have.property( 'log' );
-        prototype.should.have.property( 'on' );
-        prototype.should.have.property( 'off' );
-        prototype.should.have.property( 'get' );
-        prototype.should.have.property( 'set' );
-
-        this.on( 'service.ready', function() {
-
-          done();
-
-        });
-
-      }
-
-      var service = require( '../' ).startService({
-        "name": "rabbit-test",
-        "port": 1300,
-        "default_vhost": "/test"
-      }, serviceHandler );
-
-      // Inherited Properties
-      service.should.have.property( 'get' );
-      service.should.have.property( 'set' );
-      service.should.have.property( 'log' );
-      service.should.have.property( 'debug' );
-      service.should.have.property( 'createProducer' );
-      service.should.have.property( 'createConsumer' );
-      service.should.have.property( 'createClient' );
-      service.should.have.property( 'registerJob' );
-      service.should.have.property( 'runJob' );
-      service.should.have.property( 'manage' );
-      service.should.have.property( 'configure' );
-
-      // Instance Properties
-      service.get().should.have.ownProperty( 'id' );
-      service.get().should.have.ownProperty( 'settings' );
-      service.get().should.have.ownProperty( 'validation' );
-      service.get( 'process' ).should.have.ownProperty( 'pid' );
-
-    },
-
-    "monitors CLI output.": function() {},
-
-    "can stop service.": function() {}
+    }
 
   }
 

@@ -91,7 +91,7 @@
     "grunt-jscoverage": "0.0.3",
     "grunt-shell": "*",
     "express": "*",
-    "mocha": "*",
+    "mocha": "~1.13.0",
     "should": "*",
     "grunt": "~0.4.1"
   },

@@ -17,7 +17,8 @@ module.exports = function( grunt ) {
         reporter: 'list',
         ui: 'exports'
       },
-      all: [ './test/*.js' ]
+      basic: [ 'test/api.js' ],
+      advanced: [ 'test/service.js', 'test/benchmark.js' ]
     },
 
     yuidoc: {
@@ -126,7 +127,7 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( 'grunt-shell' );
 
   // Build Assets
-  grunt.registerTask( 'default', [ 'jscoverage', 'yuidoc' ] );
+  grunt.registerTask( 'default', [ 'jscoverage', 'yuidoc', 'mochacli:basic' ] );
 
   // Install environment
   grunt.registerTask( 'install', [ 'shell:install', 'yuidoc'  ] );
@@ -141,7 +142,7 @@ module.exports = function( grunt ) {
   grunt.registerTask( 'doc', [ 'yuidoc', 'markdown' ] );
 
   // Run Tests
-  grunt.registerTask( 'test', [ 'jscoverage', 'mochacli' ] );
+  grunt.registerTask( 'test', [ 'jscoverage', 'mochacli:basic' ] );
 
   // Developer Mode
   grunt.registerTask( 'dev', [ 'watch' ] );
