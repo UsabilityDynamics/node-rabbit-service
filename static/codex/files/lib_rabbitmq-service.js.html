@@ -176,6 +176,7 @@ function RabbitMQ() {
       env: RabbitMQ.utility.extend( {}, process.env, {
         RABBITMQ_CONFIG_FILE: self.get( &#x27;settings.directories.config&#x27; ) + &#x27;/rabbitmq&#x27;,
         RABBITMQ_PID_FILE: self.get( &#x27;settings.directories.pid&#x27; ) + &#x27;/rabbitmq&#x27;,
+        RABBITMQ_MNESIA_DIR: self.get( &#x27;settings.directories.cache&#x27; ),
         RABBITMQ_NODE_PORT: self.get( &#x27;settings.port&#x27; ),
         RABBITMQ_NODE_IP_ADDRESS: self.get( &#x27;settings.host&#x27; ),
         RABBITMQ_NODENAME: self.get( &#x27;name&#x27; ),

@@ -10,7 +10,9 @@ ln -f static/etc/rabbitmq.config vendor/rabbitmq-3.2.0/etc/rabbitmq/rabbitmq-env
 if [ ! -d ".dynamic" ]; then
   rm -rf .dynamic
   mkdir .dynamic
-  mkdir .dynamic/pid
-  mkdir .dynamic/cache
-  mkdir .dynamic/logs
 fi
+
+# Flush Dynamic Directories
+rm -rf .dynamic/pid && mkdir .dynamic/pid
+rm -rf .dynamic/cache && mkdir .dynamic/cache
+rm -rf .dynamic/logs && mkdir .dynamic/logs

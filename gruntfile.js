@@ -79,13 +79,15 @@ module.exports = function( grunt ) {
 
     clean: {
       build: [
-        ".dynamic/pid",
-        ".dynamic/cache",
-        ".dynamic/logs",
+        ".dynamic/pid/*",
+        ".dynamic/cache/*",
+        ".dynamic/logs/*",
         '.DS_Store'
       ],
       release: [
-        ".dynamic",
+        ".dynamic/pid/*",
+        ".dynamic/cache/*",
+        ".dynamic/logs/*",
         '.DS_Store'
       ]
     },
@@ -127,7 +129,7 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( 'grunt-shell' );
 
   // Build Assets
-  grunt.registerTask( 'default', [ 'jscoverage', 'yuidoc', 'mochacli:basic' ] );
+  grunt.registerTask( 'default', [ 'jscoverage', 'yuidoc', 'mochacli:basic', 'clean:build' ] );
 
   // Install environment
   grunt.registerTask( 'install', [ 'shell:install', 'yuidoc'  ] );

@@ -20,6 +20,8 @@ module.exports = {
        */
       function serviceHandler( error, prototype ) {
 
+        var serivce = this;
+
         if( error ) {
           console.log( 'serviceHandler error', error );
         }
@@ -36,11 +38,13 @@ module.exports = {
         prototype.should.have.property( 'get' );
         prototype.should.have.property( 'set' );
 
-        this.on( 'service.ready', function() {
-
+        this.on( 'service.exit', function() {
           done();
-
         });
+
+        setTimeout( function() {
+          serivce.stop();
+        }, 2000 )
 
       }
 
@@ -49,6 +53,8 @@ module.exports = {
         "port": 1300,
         "default_vhost": "/test"
       }, serviceHandler );
+
+      // service.on( '**', function() { console.log( 'event', this.event, arguments ); });
 
       // Inherited Properties
       service.should.have.property( 'get' );
