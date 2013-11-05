@@ -66,6 +66,9 @@ If the module was not installed globally you may run `npm link` from within the 
  - rabbitmq-client-restart: Restarts currently running instance of RabbitMQ Client and RabbitMQ.
  - rabbitmq-client-console: Enable console for interfacing with an instance.
 
+## Schemas
+The schemas are stored in static/schemas and are used for various things, most importantly validation of settings.
+
 ## License
 
 (The MIT License)

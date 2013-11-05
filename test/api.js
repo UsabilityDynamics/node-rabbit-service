@@ -83,7 +83,17 @@ module.exports = {
     // Try to start the service
     "can start service.": function( done ) {
 
-      var service = require( '../' ).startService( { port: 1200 }, function Service( error, prototype ) {
+      /**
+       * Defnes custom service handler
+       *
+       * @param error
+       * @param prototype
+       */
+      function serviceHandler( error, prototype ) {
+
+        if( error ) {
+          console.log( 'serviceHandler error', error );
+        }
 
         this.should.have.property( 'log' );
         this.should.have.property( 'on' );
@@ -99,13 +109,20 @@ module.exports = {
 
         done();
 
-      });
+      }
+
+      var service = require( '../' ).startService({
+        "port": 1200,
+        "default_vhost": "/test"
+      }, serviceHandler );
 
       // Inherited Properties
       service.should.have.property( 'get' );
       service.should.have.property( 'set' );
       service.should.have.property( 'log' );
       service.should.have.property( 'debug' );
+      // service.should.have.property( 'createProducer' );
+      // service.should.have.property( 'createConsumer' );
       service.should.have.property( 'createClient' );
       service.should.have.property( 'registerJob' );
       service.should.have.property( 'runJob' );

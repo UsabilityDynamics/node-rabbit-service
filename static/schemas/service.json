@@ -4,6 +4,23 @@
     "port": {
       "type": "number",
       "required": true
+    },
+    "directories": {
+      "type": "object",
+      "description": "Directories for storing persistent data.",
+      "required": true,
+      "properties": {
+        "logs": {
+          "type": "string",
+          "default": "cache",
+          "required": true
+        },
+        "cache": {
+          "type": "string",
+          "default": "cache",
+          "required": true
+        }
+      }
     }
   }
 }

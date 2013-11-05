@@ -107,44 +107,74 @@
 function RabbitMQ() {
   this.debug( &#x27;Creating service with [%s].&#x27;, &#x27;function&#x27; === typeof child ? child.name : typeof child );
 
-  var settings = &#x27;object&#x27; === typeof arguments[0] ? arguments[0] : {};
-  var callback = &#x27;function&#x27; === typeof arguments[1] ? arguments[1] : RabbitMQ.utility.noop;
-
-  // Extend settings with defaults
-  RabbitMQ.utility.defaults( settings, require( &#x27;../package&#x27; ).config );
+  var settings  = &#x27;object&#x27; === typeof arguments[0] ? arguments[0] : {};
+  var callback  = &#x27;function&#x27; === typeof arguments[1] ? arguments[1] : RabbitMQ.utility.noop;
+  var self      = this;
 
   // Extend child&#x27;s prototype with RabbitMQ, Object Emitter and Object Settings
   RabbitMQ.utility.inherits( callback, RabbitMQ );
-  RabbitMQ.utility.emitter.mixin( callback.prototype );
-  RabbitMQ.utility.settings.mixin( callback.prototype  );
-
-  // Instance Settings
-  callback.prototype.set( &#x27;validation&#x27;, RabbitMQ.utility.validate.validate( settings, RabbitMQ._schemas.service ) );
-  callback.prototype.set( &#x27;settings&#x27;, settings );
-  callback.prototype.set( &#x27;id&#x27;, RabbitMQ.utility.hash( settings ) );
-  callback.prototype.set( &#x27;pid&#x27;, undefined );
 
   try {
 
+    // Until the callback is instantiated we refere to its prototype
+    self = callback.prototype;
+
+    RabbitMQ.utility.emitter.mixin( self);
+    RabbitMQ.utility.settings.mixin( self  );
+
+    // Extend settings with defaults
+    self.set( &#x27;settings&#x27;, RabbitMQ.utility.defaults( settings, require( &#x27;../package&#x27; ).config ) );
+
+    // Compute absolute paths to directories
+    RabbitMQ.utility.each( self.get( &#x27;settings.directories&#x27; ), function( value, key ) {
+      self.set( &#x27;settings.directories.&#x27; + key, RabbitMQ.utility.realpath( value ) || RabbitMQ.utility.realpath( &#x27;../.dynamic/&#x27; + key ) )
+    });
+
     // Validate Settings
-    if( !callback.prototype.get( &#x27;validation&#x27; ).is_valid ) {
+    self.set( &#x27;validation&#x27;, RabbitMQ.utility.validate( self.get( &#x27;settings&#x27; ), RabbitMQ._schemas.service ) );
+
+    // Prepare PID
+    self.set( &#x27;pid&#x27;, undefined );
+
+    // Validate Settings
+    if( !self.get( &#x27;validation&#x27; ).is_valid ) {
       throw new Error( &#x27;Validation Failure: &#x27; + validation.errors.join() );
     }
 
-    // Instantaite the extended Child Service
-    callback = new callback( null, callback.prototype );
+    // Generate Instance ID from settings
+    self.set( &#x27;id&#x27;, RabbitMQ.utility.hash( self.get( &#x27;settings&#x27; ) ) );
 
+    // Instantaite the callback
+    self = RabbitMQ._instance[ self.get( &#x27;id&#x27; ) ] = new callback( null, self );
 
-    // Successful service initialized - record instance.
-    RabbitMQ._instance[ callback.get( &#x27;id&#x27; ) ] = callback;
+    self.process = RabbitMQ.utility.spawn( &#x27;ls&#x27;, [], {
+      cwd: process.cwd(),
+      env: process.env,
+      detached: false
+    });
+
+    // Try to parse JSON, Output Data
+    self.process.stdout.on( &#x27;data&#x27;, function( data ) {
+      self.log( &#x27;data&#x27;, data.toString() );
+    });
+
+    // Try to parse JSON, Output Error
+    self.process.stderr.on( &#x27;data&#x27;, function( data ) {
+      self.log( &#x27;error&#x27;, data.toString() );
+    });
+
+    // Set PID
+    self.set( &#x27;pid&#x27;, self.process.pid );
+
+    // @chainable
+    return self;
 
   } catch( error ) {
     console.error( error.message );
-    return error;
+    return self;
   }
 
-  // @chainable
-  return callback;
+  return self;
 
 }
 
@@ -158,9 +188,11 @@ Object.defineProperties( RabbitMQ.prototype, {
      * Log Entry
      *
      * @method log
+     * @uses winston
      * @for RabbitMQ.prototype
      */
     value: function log() {
+      return console.log.apply( console, arguments );
       return require( &#x27;winston&#x27; ).log.apply( null, arguments )
     },
     enumerable: true

@@ -103,6 +103,12 @@ var Utility = require( &#x27;abstract&#x27; ).utility;
  *
  */
 Object.defineProperties( module.exports = Utility, {
+  spawn: {
+    value: require( &#x27;child_process&#x27; ).spawn,
+    configurable: false,
+    enumerable: true,
+    writable: true
+  },
   inherits: {
     value: require( &#x27;util&#x27; ).inherits,
     configurable: false,
@@ -116,7 +122,7 @@ Object.defineProperties( module.exports = Utility, {
     writable: true
   },
   validate: {
-    value: require( &#x27;object-validation&#x27; ),
+    value: require( &#x27;object-validation&#x27; ).validate,
     configurable: false,
     enumerable: true,
     writable: true

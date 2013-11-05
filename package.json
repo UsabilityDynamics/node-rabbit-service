@@ -5,6 +5,10 @@
   "config": {
     "port": 8000,
     "host": "127.0.0.1",
+    "directories": {
+      "cache": ".dynamic/cache",
+      "logs": ".dynamic/logs"
+    },
     "default_user": "guest",
     "default_password": "guest",
     "default_vhost": "/",
