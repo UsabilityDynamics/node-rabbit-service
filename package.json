@@ -1,5 +1,5 @@
 {
-  "name": "rabbitmq-service",
+  "name": "rabbit-service",
   "description": "Node.js RabbitMQ Client.",
   "version": "3.2.0",
   "config": {
@@ -7,7 +7,7 @@
     "port": 5672,
     "host": "127.0.0.1",
     "exchange": "",
-    "identify": "rabbitmq-service",
+    "identify": "rabbit-service",
     "directories": {
       "config": "static/etc",
       "cache": ".dynamic/cache",
@@ -34,12 +34,10 @@
     "vendor": "./vendor"
   },
   "bin": {
-    "rabbitmq-service-start": "./bin/rabbitmq-service-start.js",
-    "rabbitmq-service-stop": "./bin/rabbitmq-service-stop.js",
-    "rabbitmq-service-status": "./bin/rabbitmq-service-status.js",
-    "rabbitmq-service-restart": "./bin/rabbitmq-service-restart.js",
-    "rabbitmq-service-install": "./bin/rabbitmq-service-install.js",
-    "rabbitmq-service-console": "./bin/rabbitmq-service-console.js"
+    "rabbit-service-start": "./bin/rabbit-service-start.js",
+    "rabbit-service-stop": "./bin/rabbit-service-stop.js",
+    "rabbit-service-install": "./bin/rabbit-service-install.js",
+    "rabbit-service-console": "./bin/rabbit-service-console.js"
   },
   "scripts": {
     "install": "bash bin/bash/install.sh",
@@ -53,22 +51,22 @@
     "rabbitmq",
     "amqp"
   ],
-  "homepage": "http://github.com/UsabilityDynamics/node-rabbitmq-service",
+  "homepage": "http://github.com/UsabilityDynamics/node-rabbit-service",
   "author": {
     "name": "Usability Dynamics",
     "email": "info@UsabilityDynamics.com",
     "url": "http://UsabilityDynamics.com"
   },
   "bugs": {
-    "url": "http://github.com/UsabilityDynamics/node-rabbitmq-service/issues"
+    "url": "http://github.com/UsabilityDynamics/node-rabbit-service/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://github.com/UsabilityDynamics/node-rabbitmq-service/blob/master/LICENSE-MIT"
+      "url": "http://github.com/UsabilityDynamics/node-rabbit-service/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "lib/rabbitmq-service.js",
+  "main": "lib/rabbit-service.js",
   "dependencies": {
     "auto": "0.0.2",
     "abstract": "0.0.8",
@@ -96,7 +94,7 @@
     "grunt": "~0.4.1"
   },
   "repository": {
-    "url": "git@github.com:UsabilityDynamics/node-rabbitmq-service.git",
+    "url": "git@github.com:UsabilityDynamics/node-rabbit-service.git",
     "type": "git"
   },
   "engines": {
