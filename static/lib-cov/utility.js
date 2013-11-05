@@ -28,17 +28,42 @@
     };
   }
 })();
-_$jscoverage_init(_$jscoverage, "lib/utility.js",[10]);
+_$jscoverage_init(_$jscoverage, "lib/utility.js",[7,13]);
 _$jscoverage_init(_$jscoverage_cond, "lib/utility.js",[]);
-_$jscoverage["lib/utility.js"].source = ["/**"," * RabbitMQ Client Utility Methods"," *"," * @constructor"," */","function Utility() {","","}","","Object.defineProperties( module.exports = Utility, {","  method: {","    /**","     * Some Utility Method","     *","     */","    value: function method() {","","    },","    enumerable: true,","    configurable: true,","    writable: true","  }","});"];
-function Utility() {}
+_$jscoverage["lib/utility.js"].source = ["/**"," * RabbitMQ Client Utility Methods"," *"," * @class Utility"," * @uses Abstract"," */","var Utility = require( 'abstract' ).utility;","","/**"," * Extra Utility Methods"," *"," */","Object.defineProperties( module.exports = Utility, {","  inherits: {","    value: require( 'util' ).inherits,","    configurable: false,","    enumerable: true,","    writable: true","  },","  settings: {","    value: require( 'object-settings' ),","    configurable: false,","    enumerable: true,","    writable: true","  },","  validate: {","    value: require( 'object-validation' ),","    configurable: false,","    enumerable: true,","    writable: true","  },","  emitter: {","    value: require( 'object-emitter' ),","    configurable: false,","    enumerable: true,","    writable: true","  },","  request: {","    value: require( 'request' ),","    configurable: false,","    enumerable: true,","    writable: true","  }","});"];
+_$jscoverage_done("lib/utility.js", 7);
+var Utility = require("abstract").utility;
 
-_$jscoverage_done("lib/utility.js", 10);
+_$jscoverage_done("lib/utility.js", 13);
 Object.defineProperties(module.exports = Utility, {
-    method: {
-        value: function method() {},
+    inherits: {
+        value: require("util").inherits,
+        configurable: false,
         enumerable: true,
-        configurable: true,
+        writable: true
+    },
+    settings: {
+        value: require("object-settings"),
+        configurable: false,
+        enumerable: true,
+        writable: true
+    },
+    validate: {
+        value: require("object-validation"),
+        configurable: false,
+        enumerable: true,
+        writable: true
+    },
+    emitter: {
+        value: require("object-emitter"),
+        configurable: false,
+        enumerable: true,
+        writable: true
+    },
+    request: {
+        value: require("request"),
+        configurable: false,
+        enumerable: true,
         writable: true
     }
 });

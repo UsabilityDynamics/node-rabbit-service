@@ -2,12 +2,14 @@
   "name": "rabbitmq-client",
   "description": "Node.js RabbitMQ Client.",
   "version": "3.2.0",
-  "keywords": [
-    "node",
-    "module"
-  ],
-  "homepage": "http://github.com/UsabilityDynamics/node-rabbitmq-client",
-  "config": {},
+  "config": {
+    "port": 8000,
+    "host": "127.0.0.1",
+    "default_user": "guest",
+    "default_password": "guest",
+    "default_vhost": "/",
+    "cluster_nodes": []
+  },
   "directories": {
     "doc": "./static/codex",
     "examples": "./examples",
@@ -18,12 +20,18 @@
   "bin": {
     "rabbitmq-client-start": "./bin/rabbitmq-client-start.js",
     "rabbitmq-client-stop": "./bin/rabbitmq-client-stop.js",
+    "rabbitmq-client-restart": "./bin/rabbitmq-client-restart.js",
     "rabbitmq-client-console": "./bin/rabbitmq-client-console.js"
   },
   "scripts": {
     "install": "bash bin/shell/install.sh",
     "publish": "bash bin/shell/install.sh"
   },
+  "keywords": [
+    "rabbitmq",
+    "amqp"
+  ],
+  "homepage": "http://github.com/UsabilityDynamics/node-rabbitmq-client",
   "author": {
     "name": "Usability Dynamics",
     "email": "info@UsabilityDynamics.com",
@@ -39,11 +47,9 @@
     }
   ],
   "main": "lib/rabbitmq-client.js",
-  "engines": {
-    "node": ">=0.10.21"
-  },
   "dependencies": {
     "auto": "auto",
+    "winston": "0.7.2",
     "commander": "2.0.0",
     "rabbit": "0.1.0",
     "object-emitter": "*",
@@ -65,5 +71,8 @@
     "mocha": "*",
     "should": "*",
     "grunt": "~0.4.1"
+  },
+  "engines": {
+    "node": ">=0.10.21"
   }
 }

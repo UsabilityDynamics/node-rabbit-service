@@ -114,7 +114,7 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( 'grunt-shell' );
 
   // Build Assets
-  grunt.registerTask( 'default', [ 'markdown', 'yuidoc', 'mochacli' ] );
+  grunt.registerTask( 'default', [ 'jscoverage', 'yuidoc' ] );
 
   // Install environment
   grunt.registerTask( 'install', [ 'shell:install', 'yuidoc'  ] );

@@ -34,10 +34,10 @@ However, Service creation can be bypassed protoypal methods may be accessed dire
  - createClient( conf, cb ): Creates a new Connection. This is done automatically when service is started.
  - createConsumer( conf, [cb] ):
  - createProducer( conf, [cb] ):
- - configure( [fn] ): A simple way of adding a method to be called once the Service is started.
 
 ## Service Instance Methods
 
+ - configure( [fn] ): A simple way of adding a method to be called once the Service is started successfully. Same as binding an event to `connection:success`.
  - createClient()
  - registerJob( name, [cb] ):
  - runJob( name, [cb] ):
@@ -49,6 +49,13 @@ However, Service creation can be bypassed protoypal methods may be accessed dire
  - on( event, [cb] )
  - off( event, [cb] )
  - emit( event, [args...] )
+
+## Service Instance Events
+
+ - connection
+ - connection:success
+ - connection:error
+ - error
 
 ## Command Line Usage
 When the Node.js module is installed globally using NPM several CLI commands become available.

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>RabbitMQ - rabbitmq-client</title>
+    <title>RabbitMQ.prototype - rabbitmq-client</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -86,16 +86,12 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>RabbitMQ Class</h1>
+                        <h1>RabbitMQ.prototype Class</h1>
 <div class="box meta">
     
 
     
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/lib_rabbitmq-client.js.html#l1"><code>lib&#x2F;rabbitmq-client.js:1</code></a>
-        </div>
     
 
     
@@ -106,141 +102,9 @@
 
 
 <div class="box intro">
-    <p>RabbitMQ Service Constructor</p>
-
-</div>
-
-
-    <div class="constructor">
-        <h2>Constructor</h2>
-        <div id="method_RabbitMQ" class="method item">
-    <h3 class="name"><code>RabbitMQ</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>settings</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/RabbitMQ.html" class="crosslink">RabbitMQ</a></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag async">async</span>
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_rabbitmq-client.js.html#l1"><code>lib&#x2F;rabbitmq-client.js:1</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">settings</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Configuration settings.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Callback function.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="../classes/RabbitMQ.html" class="crosslink">RabbitMQ</a></span>:
-                    
-                
-            </div>
-        </div>
-    
-
     
 </div>
 
-    </div>
 
 
 <div id="classdocs" class="tabview">
@@ -251,8 +115,6 @@
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
         
-        
-            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
         
         
     </ul>
@@ -268,28 +130,7 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_create">create</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_create">create</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_create">create</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_create">create</a>
+                                <a href="#method_configure">configure</a>
 
                                 
                                 
@@ -309,28 +150,40 @@
                                 
                             </li>
                         
+                            <li class="index-item method">
+                                <a href="#method_log">log</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_registerJob">registerJob</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_registerJob">registerJob</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_registerJob">registerJob</a>
+
+                                
+                                
+                            </li>
+                        
                     </ul>
                 </div>
             
 
             
 
-            
-                <div class="index-section attrs">
-                    <h3>Attributes</h3>
-
-                    <ul class="index-list attrs">
-                        
-                            <li class="index-item attr">
-                                <a href="#attr__instance">_instance</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="#attr__schemas">_schemas</a>
-                            </li>
-                        
-                    </ul>
-                </div>
             
 
             
@@ -341,8 +194,8 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_create" class="method item">
-    <h3 class="name"><code>create</code></h3>
+                    <div id="method_configure" class="method item">
+    <h3 class="name"><code>configure</code></h3>
 
     
         <span class="paren">()</span>
@@ -373,7 +226,7 @@
             
         
         
-        <a href="../files/lib_rabbitmq-client.js.html#l154"><code>lib&#x2F;rabbitmq-client.js:154</code></a>
+        <a href="../files/lib_rabbitmq-client.js.html#l135"><code>lib&#x2F;rabbitmq-client.js:135</code></a>
         
         </p>
 
@@ -384,172 +237,7 @@
     </div>
 
     <div class="description">
-        <p>Create Instance</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_create" class="method item">
-    <h3 class="name"><code>create</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_rabbitmq-client.js.html#l176"><code>lib&#x2F;rabbitmq-client.js:176</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Destroy Instance</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_create" class="method item">
-    <h3 class="name"><code>create</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_rabbitmq-client.js.html#l197"><code>lib&#x2F;rabbitmq-client.js:197</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Create Instance</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_create" class="method item">
-    <h3 class="name"><code>create</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_rabbitmq-client.js.html#l221"><code>lib&#x2F;rabbitmq-client.js:221</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Get Instance by PID</p>
+        <p>Create Configuration Callback</p>
 
     </div>
 
@@ -593,7 +281,7 @@
             
         
         
-        <a href="../files/lib_rabbitmq-client.js.html#l209"><code>lib&#x2F;rabbitmq-client.js:209</code></a>
+        <a href="../files/lib_rabbitmq-client.js.html#l87"><code>lib&#x2F;rabbitmq-client.js:87</code></a>
         
         </p>
 
@@ -604,7 +292,7 @@
     </div>
 
     <div class="description">
-        <p>Create Generic Client</p>
+        <p>Create Client</p>
 
     </div>
 
@@ -648,7 +336,7 @@
             
         
         
-        <a href="../files/lib_rabbitmq-client.js.html#l166"><code>lib&#x2F;rabbitmq-client.js:166</code></a>
+        <a href="../files/lib_rabbitmq-client.js.html#l77"><code>lib&#x2F;rabbitmq-client.js:77</code></a>
         
         </p>
 
@@ -659,7 +347,7 @@
     </div>
 
     <div class="description">
-        <p>Constructor Debugger</p>
+        <p>Debug Entry</p>
 
     </div>
 
@@ -671,20 +359,12 @@
 </div>
 
                 
-            </div>
-        
+                    <div id="method_log" class="method item">
+    <h3 class="name"><code>log</code></h3>
 
-        
-
-        
-            <div id="attrs" class="api-class-tabpanel">
-                <h2 class="off-left">Attributes</h2>
-
-                
-                    <div id="attr__instance" class="attr item">
-    <a name="config__instance"></a> 
-    <h3 class="name"><code>_instance</code></h3>
-    <span class="type">Object</span>
+    
+        <span class="paren">()</span>
+    
 
     
 
@@ -711,9 +391,10 @@
             
         
         
-        <a href="../files/lib_rabbitmq-client.js.html#l247"><code>lib&#x2F;rabbitmq-client.js:247</code></a>
+        <a href="../files/lib_rabbitmq-client.js.html#l65"><code>lib&#x2F;rabbitmq-client.js:65</code></a>
         
         </p>
+
 
         
 
@@ -721,7 +402,7 @@
     </div>
 
     <div class="description">
-        <p>Instance Map</p>
+        <p>Log Entry</p>
 
     </div>
 
@@ -733,10 +414,12 @@
 </div>
 
                 
-                    <div id="attr__schemas" class="attr item">
-    <a name="config__schemas"></a> 
-    <h3 class="name"><code>_schemas</code></h3>
-    <span class="type">Object</span>
+                    <div id="method_registerJob" class="method item">
+    <h3 class="name"><code>registerJob</code></h3>
+
+    
+        <span class="paren">()</span>
+    
 
     
 
@@ -763,9 +446,10 @@
             
         
         
-        <a href="../files/lib_rabbitmq-client.js.html#l233"><code>lib&#x2F;rabbitmq-client.js:233</code></a>
+        <a href="../files/lib_rabbitmq-client.js.html#l99"><code>lib&#x2F;rabbitmq-client.js:99</code></a>
         
         </p>
+
 
         
 
@@ -773,7 +457,117 @@
     </div>
 
     <div class="description">
-        <p>Schemas</p>
+        <p>Create Job</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_registerJob" class="method item">
+    <h3 class="name"><code>registerJob</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_rabbitmq-client.js.html#l111"><code>lib&#x2F;rabbitmq-client.js:111</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Create Job</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_registerJob" class="method item">
+    <h3 class="name"><code>registerJob</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_rabbitmq-client.js.html#l123"><code>lib&#x2F;rabbitmq-client.js:123</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Create Job</p>
 
     </div>
 
@@ -786,6 +580,10 @@
 
                 
             </div>
+        
+
+        
+
         
 
         

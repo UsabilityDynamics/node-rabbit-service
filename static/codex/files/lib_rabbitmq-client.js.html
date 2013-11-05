@@ -43,6 +43,10 @@
             
                 <li><a href="../classes/RabbitMQ.html">RabbitMQ</a></li>
             
+                <li><a href="../classes/RabbitMQ.prototype.html">RabbitMQ.prototype</a></li>
+            
+                <li><a href="../classes/Utility.html">Utility</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -87,14 +91,61 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
- * RabbitMQ
+ * RabbitMQ Service Constructor
  *
  * @class RabbitMQ
  * @constructor
  * @version 3.2.0
+ * @async
+ *
+ * @param settings {Object} Configuration settings.
+ * @param callback {Function} Callback function.
+ *
+ * @returns {RabbitMQ}
+ * @constructor
  */
 function RabbitMQ() {
-  return &#x27;awesome&#x27;;
+  this.debug( &#x27;Creating service with [%s].&#x27;, &#x27;function&#x27; === typeof child ? child.name : typeof child );
+
+  var settings = &#x27;object&#x27; === typeof arguments[0] ? arguments[0] : {};
+  var callback = &#x27;function&#x27; === typeof arguments[1] ? arguments[1] : RabbitMQ.utility.noop;
+
+  // Extend settings with defaults
+  RabbitMQ.utility.defaults( settings, require( &#x27;../package&#x27; ).config );
+
+  // Extend child&#x27;s prototype with RabbitMQ, Object Emitter and Object Settings
+  RabbitMQ.utility.inherits( callback, RabbitMQ );
+  RabbitMQ.utility.emitter.mixin( callback.prototype );
+  RabbitMQ.utility.settings.mixin( callback.prototype  );
+
+  // Instance Settings
+  callback.prototype.set( &#x27;validation&#x27;, RabbitMQ.utility.validate.validate( settings, RabbitMQ._schemas.service ) );
+  callback.prototype.set( &#x27;settings&#x27;, settings );
+  callback.prototype.set( &#x27;id&#x27;, RabbitMQ.utility.hash( settings ) );
+  callback.prototype.set( &#x27;pid&#x27;, undefined );
+
+  try {
+
+    // Validate Settings
+    if( !callback.prototype.get( &#x27;validation&#x27; ).is_valid ) {
+      throw new Error( &#x27;Validation Failure: &#x27; + validation.errors.join() );
+    }
+
+    // Instantaite the extended Child Service
+    callback = new callback( null, callback.prototype );
+
+
+    // Successful service initialized - record instance.
+    RabbitMQ._instance[ callback.get( &#x27;id&#x27; ) ] = callback;
+
+  } catch( error ) {
+    console.error( error.message );
+    return error;
+  }
+
+  // @chainable
+  return callback;
+
 }
 
 /**
@@ -102,18 +153,87 @@ function RabbitMQ() {
  *
  */
 Object.defineProperties( RabbitMQ.prototype, {
-  some_action: {
+  log: {
     /**
-     * Some Actions
+     * Log Entry
      *
-     * @for RabbitMQ
+     * @method log
+     * @for RabbitMQ.prototype
      */
-    value: function some_action() {
+    value: function log() {
+      return require( &#x27;winston&#x27; ).log.apply( null, arguments )
+    },
+    enumerable: true
+  },
+  debug: {
+    /**
+     * Debug Entry
+     *
+     * @method debug
+     * @for RabbitMQ.prototype
+     */
+    value: require( &#x27;debug&#x27; )( &#x27;rabbitmq:lient&#x27; ),
+    enumerable: true
+  },
+  createClient: {
+    /**
+     * Create Client
+     *
+     * @method createClient
+     * @for RabbitMQ.prototype
+     */
+    value: function createClient() {
 
     },
-    enumerable: true,
-    configurable: true,
-    writable: true
+    enumerable: true
+  },
+  registerJob: {
+    /**
+     * Create Job
+     *
+     * @method registerJob
+     * @for RabbitMQ.prototype
+     */
+    value: function registerJob() {
+
+    },
+    enumerable: true
+  },
+  runJob: {
+    /**
+     * Create Job
+     *
+     * @method registerJob
+     * @for RabbitMQ.prototype
+     */
+    value: function registerJob() {
+
+    },
+    enumerable: true
+  },
+  manage: {
+    /**
+     * Create Job
+     *
+     * @method registerJob
+     * @for RabbitMQ.prototype
+     */
+    value: function registerJob() {
+
+    },
+    enumerable: true
+  },
+  configure: {
+    /**
+     * Create Configuration Callback
+     *
+     * @method configure
+     * @for RabbitMQ.prototype
+     */
+    value: function configure() {
+
+    },
+    enumerable: true
   }
 });
 
@@ -126,13 +246,104 @@ Object.defineProperties( module.exports = RabbitMQ, {
     /**
      * Create Instance
      *
+     * @method create
      * @for RabbitMQ
      */
-    value: function create() {
-
+    value: function create( settings, callback ) {
+      return new RabbitMQ( settings, callback );
     },
-    enumerable: true,
-    configurable: true,
+    enumerable: false
+  },
+  debug: {
+    /**
+     * Constructor Debugger
+     *
+     * @method debug
+     * @for RabbitMQ
+     */
+    value: require( &#x27;debug&#x27; )( &#x27;rabbitmq:constructor&#x27; ),
+    enumerable: true
+  },
+  destroy: {
+    /**
+     * Destroy Instance
+     *
+     * @method create
+     * @for RabbitMQ
+     */
+    value: function destroy( pid ) {
+      RabbitMQ.debug( &#x27;destroy [%s]&#x27;, pid );
+    },
+    enumerable: true
+  },
+  utility: {
+    /**
+     * Utility Methods
+     *
+     * @for RabbitMQ
+     */
+    value: require( &#x27;./utility&#x27; ),
+    enumerable: false
+  },
+  startService: {
+    /**
+     * Create Instance
+     *
+     * @method create
+     * @for RabbitMQ
+     */
+    value: function startService( settings, callback ) {
+      return RabbitMQ.create( settings, callback );
+    },
+    enumerable: true
+  },
+  createClient: {
+    /**
+     * Create Generic Client
+     *
+     * @method createClient
+     * @for RabbitMQ
+     */
+    value: function createClient( settings, callback ) {
+      console.log( &#x27;asdf&#x27; );
+    },
+    enumerable: true
+  },
+  getInstance: {
+    /**
+     * Get Instance by PID
+     *
+     * @method create
+     * @for RabbitMQ
+     */
+    value: function getInstance( pid ) {
+      return RabbitMQ.__instances ? RabbitMQ.__instances[ pid ] : null;
+    },
+    enumerable: false
+  },
+  _schemas: {
+    /**
+     * Schemas
+     *
+     * @attribute _schemas
+     * @type object
+     */
+    value: {
+      service: require( &#x27;../static/schemas/service&#x27; ),
+      job: require( &#x27;../static/schemas/job&#x27; )
+    },
+    enumerable: false,
+    writable: false
+  },
+  _instance: {
+    /**
+     * Instance Map
+     *
+     * @attribute _instance
+     * @type object
+     */
+    value: {},
+    enumerable: false,
     writable: true
   }
 });
