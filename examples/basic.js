@@ -4,7 +4,7 @@
  */
 
 // Start Service
-require( '../' ).startService( function Service() {
+require( 'rabbit-service' ).create( function Service() {
   this.log( 'RabbitMQ Service started.' );
 
   // Triggered on errors
