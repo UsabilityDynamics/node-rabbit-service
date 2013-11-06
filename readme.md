@@ -96,6 +96,7 @@ $ vendor/rabbitmq-3.2.0-mac/sbin/rabbitmq-server
  - Settings are in vendor/rabbitmq-3.2.0/etc/rabbitmq
  - The RabbitMQ configuration file used [Erlang format](http://www.erlang.org/doc/man/config.html).
  - Process has "beam.smp" process name in OSX.
+ - If tracing is enabled, logs are stored in "/var/tmp/rabbitmq-tracing". Enabling tracing adds queue, exchange and channels.
 
 ## License
 
