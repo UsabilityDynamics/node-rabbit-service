@@ -1,3 +1,9 @@
+vendor/rabbitmq-3.2.0/etc/rabbitmq/*
+vendor/rabbitmq-3.2.0/var/lib/rabbitmq/mnesia/*
+
+vendor/rabbitmq-3.2.0-mac/etc/rabbitmq/*
+vendor/rabbitmq-3.2.0-mac/var/lib/rabbitmq/mnesia/*
+
 temp
 node_modules
 npm-debug.log

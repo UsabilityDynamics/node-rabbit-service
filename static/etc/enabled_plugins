@@ -1,1 +1,5 @@
-[rabbitmq_federation,rabbitmq_management].
+[
+  rabbitmq_federation,
+  rabbitmq_management,
+  rabbitmq_tracing
+].

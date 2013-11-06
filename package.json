@@ -36,7 +36,6 @@
   "bin": {
     "rabbit-service-start": "./bin/rabbit-service-start.js",
     "rabbit-service-stop": "./bin/rabbit-service-stop.js",
-    "rabbit-service-install": "./bin/rabbit-service-install.js",
     "rabbit-service-console": "./bin/rabbit-service-console.js"
   },
   "scripts": {

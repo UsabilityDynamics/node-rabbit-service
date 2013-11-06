@@ -90,6 +90,12 @@ Manually start RabbitMQ server.
 $ vendor/rabbitmq-3.2.0/sbin/rabbitmq-server
 $ vendor/rabbitmq-3.2.0-mac/sbin/rabbitmq-server
 
+## RabbitMQ Notes
+
+ - Stored in vendor/rabbitmq-3.2.0
+ - Settings are in vendor/rabbitmq-3.2.0/etc/rabbitmq
+ - The RabbitMQ configuration file used [Erlang format](http://www.erlang.org/doc/man/config.html).
+
 ## License
 
 (The MIT License)
