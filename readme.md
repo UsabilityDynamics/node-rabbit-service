@@ -95,6 +95,7 @@ $ vendor/rabbitmq-3.2.0-mac/sbin/rabbitmq-server
  - Stored in vendor/rabbitmq-3.2.0
  - Settings are in vendor/rabbitmq-3.2.0/etc/rabbitmq
  - The RabbitMQ configuration file used [Erlang format](http://www.erlang.org/doc/man/config.html).
+ - Process has "beam.smp" process name in OSX.
 
 ## License
 

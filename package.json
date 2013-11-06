@@ -11,6 +11,7 @@
     "directories": {
       "config": "static/etc",
       "cache": ".dynamic/cache",
+      "dynamic": ".dynamic",
       "pid": ".dynamic/pid",
       "logs": ".dynamic/logs"
     },
