@@ -10,10 +10,11 @@
     "identify": "rabbit-service",
     "directories": {
       "config": "static/etc",
-      "cache": ".dynamic/cache",
       "dynamic": ".dynamic",
+      "cache": ".dynamic/cache",
       "pid": ".dynamic/pid",
-      "logs": ".dynamic/logs"
+      "lib": ".dynamic/lib",
+      "log": ".dynamic/log"
     },
     "default_user": "guest",
     "default_password": "guest",

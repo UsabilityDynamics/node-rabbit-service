@@ -10,7 +10,12 @@
       "description": "Directories for storing persistent data.",
       "required": true,
       "properties": {
-        "logs": {
+        "log": {
+          "type": "string",
+          "default": "cache",
+          "required": true
+        },
+        "lib": {
           "type": "string",
           "default": "cache",
           "required": true
