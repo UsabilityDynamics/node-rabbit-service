@@ -4,8 +4,6 @@
   "version": "3.2.0",
   "config": {
     "name": "node-rabbit",
-    "host": "localhost",
-    "port": "5672",
     "url": "amqp://guest:guest@localhost:5672/",
     "exchanges": [],
     "cluster_nodes": [],
@@ -29,9 +27,7 @@
     "vendor":   "./vendor"
   },
   "bin": {
-    "rabbit-service-start": "./bin/rabbit-service-start.js",
-    "rabbit-service-stop": "./bin/rabbit-service-stop.js",
-    "rabbit-service-console": "./bin/rabbit-service-console.js"
+    "rabbit-service": "./bin/rabbit-service.js"
   },
   "scripts": {
     "install": "bash bin/bash/install.sh",
