@@ -30,6 +30,9 @@ require( 'rabbitmq-client' ).startService( function Service() {
 
 ```
 
+## Debugging
+The module uses the debug module and emits logs in the "rabbit:service" namespace.
+
 ## Constructor Methods
 Typically the RabbitMQ Service will be started using the `startService()` method, which is nothing more but a shortcut
 to the instantiator. After instantiation the prototypal methods can be used within the constructor's callback to
