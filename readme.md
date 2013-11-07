@@ -13,16 +13,16 @@ Install the module with: `npm install rabbitmq-client -g`
 ```javascript
 
 // Start Service using default settings
-require( 'rabbitmq-client' ).startService( function Service() {
+require( 'rabbitmq-client' ).create( function Service() {
   this.log( 'RabbitMQ Service started.' );
 
   // Triggered on errors
-  this.on( 'error', function error_handler( error ) {
+  this.on( 'server.error', function error_handler( error ) {
    console.log( 'An error occured: [%s]', error.message );
   });
 
   // Triggered when ready
-  this.on( 'ready', function ready( error, message ) {
+  this.on( 'server.ready', function ready( error, message ) {
     console.log( error ? 'An error occured: [' + error.message + ']' : 'RabbitMQ Service started successfully' );
   });
 
@@ -49,8 +49,8 @@ However, Service creation can be bypassed protoypal methods may be accessed dire
 
  - configure( [fn] ): A simple way of adding a method to be called once the Service is started successfully. Same as binding an event to `connection:success`.
  - createClient()
- - registerJob( name, [cb] ):
- - runJob( name, [cb] ):
+ - registerActivity( name, [cb] ):
+ - startActivity( name, [cb] ):
  - log()
  - debug()
  - get( key )

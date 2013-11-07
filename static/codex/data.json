@@ -153,7 +153,7 @@
             "line": 214,
             "description": "Create Job",
             "itemtype": "method",
-            "name": "registerJob",
+            "name": "registerActivity",
             "class": "RabbitMQ.prototype"
         },
         {
@@ -161,7 +161,7 @@
             "line": 226,
             "description": "Create Job",
             "itemtype": "method",
-            "name": "registerJob",
+            "name": "registerActivity",
             "class": "RabbitMQ.prototype"
         },
         {
@@ -169,7 +169,7 @@
             "line": 238,
             "description": "Create Job",
             "itemtype": "method",
-            "name": "registerJob",
+            "name": "registerActivity",
             "class": "RabbitMQ.prototype"
         },
         {

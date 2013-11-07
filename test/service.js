@@ -64,8 +64,8 @@ module.exports = {
       service.should.have.property( 'createProducer' );
       service.should.have.property( 'createConsumer' );
       service.should.have.property( 'createClient' );
-      service.should.have.property( 'registerJob' );
-      service.should.have.property( 'runJob' );
+      service.should.have.property( 'registerActivity' );
+      service.should.have.property( 'startActivity' );
       service.should.have.property( 'manage' );
       service.should.have.property( 'configure' );
 

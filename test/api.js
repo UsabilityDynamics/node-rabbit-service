@@ -29,8 +29,8 @@ module.exports = {
       client.prototype.should.have.ownProperty( 'log' );
       client.prototype.should.have.ownProperty( 'debug' );
       client.prototype.should.have.ownProperty( 'createClient' );
-      client.prototype.should.have.ownProperty( 'registerJob' );
-      client.prototype.should.have.ownProperty( 'runJob' );
+      client.prototype.should.have.ownProperty( 'registerActivity' );
+      client.prototype.should.have.ownProperty( 'startActivity' );
       client.prototype.should.have.ownProperty( 'manage' );
       client.prototype.should.have.ownProperty( 'configure' );
 

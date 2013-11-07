@@ -4,24 +4,12 @@
   "version": "3.2.0",
   "config": {
     "name": "node-rabbit",
-    "port": 5672,
-    "host": "127.0.0.1",
-    "exchange": "",
-    "identify": "rabbit-service",
-    "directories": {
-      "config": "static/etc",
-      "dynamic": ".dynamic",
-      "cache": ".dynamic/cache",
-      "pid": ".dynamic/pid",
-      "lib": ".dynamic/lib",
-      "log": ".dynamic/log"
-    },
-    "default_user": "guest",
-    "default_password": "guest",
-    "default_vhost": "/",
+    "host": "localhost",
+    "port": "5672",
+    "url": "amqp://guest:guest@localhost:5672/",
+    "exchanges": [],
     "cluster_nodes": [],
     "management": {
-      "http_log_dir": ".dynamic/logs",
       "port": 15672,
       "host": "127.0.0.1"
     },
@@ -29,11 +17,16 @@
     "reconnect": true
   },
   "directories": {
-    "doc": "./static/codex",
+    "config":   "./static/etc",
+    "cache":    ".dynamic/cache",
+    "bin":      "./bin",
+    "doc":      "./static/codex",
+    "dynamic":  ".dynamic",
     "examples": "./examples",
-    "bin": "./bin",
-    "lib": "./lib",
-    "vendor": "./vendor"
+    "lib":      "./lib",
+    "pid":      ".dynamic/pid",
+    "log":      ".dynamic/log",
+    "vendor":   "./vendor"
   },
   "bin": {
     "rabbit-service-start": "./bin/rabbit-service-start.js",

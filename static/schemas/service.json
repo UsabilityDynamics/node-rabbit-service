@@ -1,28 +1,28 @@
 {
   "description": "RabbitMQ Client Service settings schema.",
   "properties": {
-    "port": {
-      "type": "number",
+    "url": {
+      "type": "string",
       "required": true
     },
     "directories": {
       "type": "object",
       "description": "Directories for storing persistent data.",
-      "required": true,
+      "required": false,
       "properties": {
         "log": {
           "type": "string",
-          "default": "cache",
+          "default": "./.dynamic/log",
           "required": true
         },
-        "lib": {
+        "vendor": {
           "type": "string",
-          "default": "cache",
+          "default": "./vendor",
           "required": true
         },
         "cache": {
           "type": "string",
-          "default": "cache",
+          "default": "./.dynamic/cache",
           "required": true
         }
       }
