@@ -14,11 +14,11 @@ Install the module with: `npm install rabbitmq-client -g`
 
 // Start Service using default settings
 require( 'rabbitmq-client' ).create( function Service() {
-  this.log( 'RabbitMQ Service started.' );
+  this.log( 'RabbitMQ Service starting.' );
 
   // Triggered on errors
   this.on( 'server.error', function error_handler( error ) {
-   console.log( 'An error occured: [%s]', error.message );
+   console.log( 'RabbitMQ Service error occured: [%s]', error.message );
   });
 
   // Triggered when ready
