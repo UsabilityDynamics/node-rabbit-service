@@ -30,7 +30,7 @@ module.exports = {
       client.prototype.should.have.ownProperty( 'debug' );
       client.prototype.should.have.ownProperty( 'createClient' );
       client.prototype.should.have.ownProperty( 'registerActivity' );
-      client.prototype.should.have.ownProperty( 'startActivity' );
+      client.prototype.should.have.ownProperty( 'processTask' );
       client.prototype.should.have.ownProperty( 'manage' );
       client.prototype.should.have.ownProperty( 'configure' );
 

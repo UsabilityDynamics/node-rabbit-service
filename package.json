@@ -1,9 +1,13 @@
 {
   "name": "rabbit-service",
-  "description": "Node.js RabbitMQ Service. We service rabbits.",
   "version": "3.2.0",
+  "description": "Node.js RabbitMQ Service. We service rabbits.",
+  "keywords": [
+    "rabbitmq",
+    "amqp"
+  ],
   "config": {
-    "name": "node-rabbit",
+    "name": "rabbit-service",
     "url": "amqp://guest:guest@localhost:5672/",
     "exchanges": [],
     "cluster_nodes": [],
@@ -14,18 +18,7 @@
     "defaultExchangeName": "",
     "reconnect": true
   },
-  "directories": {
-    "config":   "./static/etc",
-    "cache":    ".dynamic/cache",
-    "bin":      "./bin",
-    "doc":      "./static/codex",
-    "dynamic":  ".dynamic",
-    "examples": "./examples",
-    "lib":      "./lib",
-    "pid":      ".dynamic/pid",
-    "log":      ".dynamic/log",
-    "vendor":   "./vendor"
-  },
+  "copyright": "Copyright (c) 2013 Usability Dynamics, Inc.",
   "bin": {
     "rabbit-service": "./bin/rabbit-service.js"
   },
@@ -36,36 +29,58 @@
     "update": "bash bin/bash/update.sh",
     "publish": "bash bin/bash/install.sh"
   },
-  "preferGlobal": true,
-  "keywords": [
-    "rabbitmq",
-    "amqp"
-  ],
-  "homepage": "http://github.com/UsabilityDynamics/node-rabbit-service",
+  "directories": {
+    "config": "./static/etc",
+    "cache": ".dynamic/cache",
+    "bin": "./bin",
+    "doc": "./static/codex",
+    "dynamic": ".dynamic",
+    "examples": "./examples",
+    "lib": "./lib",
+    "pid": ".dynamic/pid",
+    "log": ".dynamic/log",
+    "vendor": "./vendor"
+  },
   "author": {
     "name": "Usability Dynamics",
     "email": "info@UsabilityDynamics.com",
     "url": "http://UsabilityDynamics.com"
   },
+  "preferGlobal": true,
+  "homepage": "http://github.com/UsabilityDynamics/node-rabbit-service",
   "bugs": {
     "url": "http://github.com/UsabilityDynamics/node-rabbit-service/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://github.com/UsabilityDynamics/node-rabbit-service/blob/master/LICENSE-MIT"
+      "url": "https://github.com/UsabilityDynamics/node-rabbit-service#license"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Andy Potanin",
+      "email": "andy.potanin@usabilitydynamics.com",
+      "url": "http://usabilitydynamics.com"
+    },
+    {
+      "name": "Ivan McCarthy",
+      "email": "ivan.mccarthy@usabilitydynamics.com",
+      "url": "http://usabilitydynamics.com"
     }
   ],
   "main": "lib/rabbit-service.js",
   "dependencies": {
     "auto": ">=0.0.2",
+    "debug": ">=0.7.3",
     "abstract": ">=0.0.8",
     "commander": ">=2.0.0",
     "rabbit-client": "git+ssh://git@github.com:UsabilityDynamics/node-rabbit-client#master",
     "object-emitter": ">=0.0.5",
     "object-settings": ">=0.0.6",
     "object-validation": ">=0.0.3",
-    "winston": ">=0.7.2"
+    "winston": ">=0.7.2",
+    "string": "~1.6.1"
   },
   "devDependencies": {
     "grunt-contrib-symlink": "~0.2.0",

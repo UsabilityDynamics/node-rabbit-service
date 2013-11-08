@@ -19,6 +19,7 @@ module.commander
     module.rabbit.create( function Service( error ) {
       this.log( 'Starting Rabbit Service.' );
 
+      // Update settings.
       this.set( 'settings.name', options.name );
       this.set( 'settings.environment', process.env.NODE_ENV || 'production' );
       this.set( 'settings.cluster', options.cluster );
@@ -36,7 +37,7 @@ module.commander
 
       // Triggered when ready
       this.once( 'server.ready', function ready( error, data ) {
-        console.log( error ? 'An error occured: [' + error.message + ']' : 'RabbitMQ Service started successfully.', data.pid );
+        console.log( error ? 'An error occured: [' + error.message + ']' : 'Rabbit Service started successfully. PID: [%s]; Plugins: [%s].', data.pid, data.plugins );
       });
 
     });

@@ -5,7 +5,6 @@
 if [ ! -d ".dynamic" ]; mkdir .dynamic; fi
 if [ ! -d ".dynamic/cache" ]; mkdir .dynamic/cache; fi
 if [ ! -d ".dynamic/pid" ]; mkdir .dynamic/pid; fi
-if [ ! -d ".dynamic/lib" ]; mkdir .dynamic/lib; fi
 if [ ! -d ".dynamic/log" ]; mkdir .dynamic/log; fi
 
 # Link Configuration Files

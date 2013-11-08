@@ -4,7 +4,6 @@
 # Flush Dynamic Directories
 rm -rf .dynamic && mkdir .dynamic
 rm -rf .dynamic/pid && mkdir .dynamic/pid
-rm -rf .dynamic/lib && mkdir .dynamic/lib
 rm -rf .dynamic/log && mkdir .dynamic/log
 rm -rf .dynamic/cache && mkdir .dynamic/cache
 

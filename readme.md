@@ -7,6 +7,8 @@ Node.js RabbitMQ Service.
  - Can be used as a daemonized RabbitMQ service handler.
  - Modular structure for easy prototypal extension.
 
+To start the service via the terminal: `rabbit-service start`
+
 ## Getting Started
 Install the module with: `npm install rabbitmq-client -g`
 
@@ -50,7 +52,7 @@ However, Service creation can be bypassed protoypal methods may be accessed dire
  - configure( [fn] ): A simple way of adding a method to be called once the Service is started successfully. Same as binding an event to `connection:success`.
  - createClient()
  - registerActivity( name, [cb] ):
- - startActivity( name, [cb] ):
+ - processTask( name, [cb] ):
  - log()
  - debug()
  - get( key )
