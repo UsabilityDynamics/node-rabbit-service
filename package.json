@@ -23,11 +23,11 @@
     "rabbit-service": "./bin/rabbit-service.js"
   },
   "scripts": {
-    "install": "bash bin/bash/install.sh",
-    "pretest": "bash bin/bash/pretest.sh",
-    "posttest": "bash bin/bash/posttest.sh",
-    "update": "bash bin/bash/update.sh",
-    "publish": "bash bin/bash/install.sh"
+    "_install": "bash bin/bash/install.sh",
+    "_pretest": "bash bin/bash/pretest.sh",
+    "_posttest": "bash bin/bash/posttest.sh",
+    "_update": "bash bin/bash/update.sh",
+    "_publish": "bash bin/bash/install.sh"
   },
   "directories": {
     "config": "./static/etc",
