@@ -7,7 +7,7 @@ Node.js RabbitMQ Service.
  - Can be used as a daemonized RabbitMQ service handler.
  - Modular structure for easy prototypal extension.
 
-To start the service via the terminal: `rabbit-service start`
+To start the service via the terminal: `./bin/rabbit-service.js start` or `forever start rabbit-service start`
 
 ## Getting Started
 Install the module with: `npm install rabbitmq-client -g`
@@ -71,12 +71,12 @@ However, Service creation can be bypassed protoypal methods may be accessed dire
 When the Node.js module is installed globally using NPM several CLI commands become available.
 If the module was not installed globally you may run `npm link` from within the module.
 
- - rabbitmq-client-start: Start RabbitMQ Service using default settings extended by command-line arguments.
- - rabbitmq-client-stop: Stop currently running instance of RabbitMQ Service and RabbitMQ.
- - rabbitmq-client-status: Get status of service - used to check if running.
- - rabbitmq-client-restart: Restarts currently running instance of RabbitMQ Service and RabbitMQ.
- - rabbitmq-client-console: Enable console for interfacing with an instance.
- - rabbitmq-client-install: Daemonize RabbitMQ Service.
+ - rabbit-service start: Start RabbitMQ Service using default settings extended by command-line arguments.
+ - rabbit-service stop: Stop currently running instance of RabbitMQ Service and RabbitMQ.
+ - rabbit-service status: Get status of service - used to check if running.
+ - rabbit-service restart: Restarts currently running instance of RabbitMQ Service and RabbitMQ.
+ - rabbit-service console: Enable console for interfacing with an instance.
+ - rabbit-service install: Daemonize RabbitMQ Service.
 
 ## Schemas
 The schemas are stored in static/schemas and are used for various things, most importantly validation of settings.

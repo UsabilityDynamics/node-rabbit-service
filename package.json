@@ -30,15 +30,14 @@
     "_publish": "bash bin/bash/install.sh"
   },
   "directories": {
-    "config": "./static/etc",
-    "cache": ".dynamic/cache",
+    "config": "/etc/rabbit-service",
+    "cache": "/var/cache/rabbit-service",
     "bin": "./bin",
     "doc": "./static/codex",
     "dynamic": ".dynamic",
-    "examples": "./examples",
     "lib": "./lib",
-    "pid": ".dynamic/pid",
-    "log": ".dynamic/log",
+    "pid": "/var/rabbit-service",
+    "log": "/var/log/rabbit-service",
     "vendor": "./vendor"
   },
   "author": {
@@ -75,12 +74,12 @@
     "debug": ">=0.7.3",
     "abstract": ">=0.0.8",
     "commander": ">=2.0.0",
-    "rabbit-client": "git+ssh://git@github.com:UsabilityDynamics/node-rabbit-client#master",
     "object-emitter": ">=0.0.5",
     "object-settings": ">=0.0.6",
     "object-validation": ">=0.0.3",
     "winston": ">=0.7.2",
-    "string": "~1.6.1"
+    "string": "~1.6.1",
+    "request": "~2.27.0"
   },
   "devDependencies": {
     "grunt-contrib-symlink": "~0.2.0",
