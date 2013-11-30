@@ -7,7 +7,13 @@ Node.js RabbitMQ Service.
  - Can be used as a daemonized RabbitMQ service handler.
  - Modular structure for easy prototypal extension.
 
-To start the service via the terminal: `./bin/rabbit-service.js start` or `forever start rabbit-service start`
+To start the service via the terminal: 
+
+```
+./bin/rabbit-service.js start --url amqp://localhost:5672
+
+forever start rabbit-service start --name my-rabbit --url amqp://localhost:9000
+```
 
 ## Getting Started
 Install the module with: `npm install rabbitmq-client -g`
