@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>RabbitMQ.prototype - rabbit-service</title>
+    <title>RabbitService.prototype - rabbit-service</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,9 +41,9 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/RabbitMQ.html">RabbitMQ</a></li>
+                <li><a href="../classes/RabbitService.html">RabbitService</a></li>
             
-                <li><a href="../classes/RabbitMQ.prototype.html">RabbitMQ.prototype</a></li>
+                <li><a href="../classes/RabbitService.prototype.html">RabbitService.prototype</a></li>
             
                 <li><a href="../classes/Utility.html">Utility</a></li>
             
@@ -86,7 +86,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>RabbitMQ.prototype Class</h1>
+                        <h1>RabbitService.prototype Class</h1>
 <div class="box meta">
     
 
@@ -128,13 +128,6 @@
                     <h3>Methods</h3>
 
                     <ul class="index-list methods">
-                        
-                            <li class="index-item method">
-                                <a href="#method_configure">configure</a>
-
-                                
-                                
-                            </li>
                         
                             <li class="index-item method">
                                 <a href="#method_createClient">createClient</a>
@@ -179,7 +172,7 @@
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_registerActivity">registerActivity</a>
+                                <a href="#method_log">log</a>
 
                                 
                                 
@@ -194,6 +187,20 @@
                         
                             <li class="index-item method">
                                 <a href="#method_registerActivity">registerActivity</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_registerActivity">registerActivity</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_validate">validate</a>
 
                                 
                                 
@@ -215,61 +222,6 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_configure" class="method item">
-    <h3 class="name"><code>configure</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_rabbit-service.js.html#l250"><code>lib&#x2F;rabbit-service.js:250</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Create Configuration Callback</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="method_createClient" class="method item">
     <h3 class="name"><code>createClient</code></h3>
 
@@ -302,7 +254,7 @@
             
         
         
-        <a href="../files/lib_rabbit-service.js.html#l178"><code>lib&#x2F;rabbit-service.js:178</code></a>
+        <a href="../files/lib_rabbit-service.js.html#l348"><code>lib&#x2F;rabbit-service.js:348</code></a>
         
         </p>
 
@@ -357,7 +309,7 @@
             
         
         
-        <a href="../files/lib_rabbit-service.js.html#l190"><code>lib&#x2F;rabbit-service.js:190</code></a>
+        <a href="../files/lib_rabbit-service.js.html#l372"><code>lib&#x2F;rabbit-service.js:372</code></a>
         
         </p>
 
@@ -412,7 +364,7 @@
             
         
         
-        <a href="../files/lib_rabbit-service.js.html#l202"><code>lib&#x2F;rabbit-service.js:202</code></a>
+        <a href="../files/lib_rabbit-service.js.html#l360"><code>lib&#x2F;rabbit-service.js:360</code></a>
         
         </p>
 
@@ -467,7 +419,7 @@
             
         
         
-        <a href="../files/lib_rabbit-service.js.html#l168"><code>lib&#x2F;rabbit-service.js:168</code></a>
+        <a href="../files/lib_rabbit-service.js.html#l338"><code>lib&#x2F;rabbit-service.js:338</code></a>
         
         </p>
 
@@ -522,7 +474,7 @@
             
         
         
-        <a href="../files/lib_rabbit-service.js.html#l140"><code>lib&#x2F;rabbit-service.js:140</code></a>
+        <a href="../files/lib_rabbit-service.js.html#l97"><code>lib&#x2F;rabbit-service.js:97</code></a>
         
         </p>
 
@@ -577,7 +529,7 @@
             
         
         
-        <a href="../files/lib_rabbit-service.js.html#l154"><code>lib&#x2F;rabbit-service.js:154</code></a>
+        <a href="../files/lib_rabbit-service.js.html#l207"><code>lib&#x2F;rabbit-service.js:207</code></a>
         
         </p>
 
@@ -600,6 +552,79 @@
 </div>
 
                 
+                    <div id="method_log" class="method item">
+    <h3 class="name"><code>log</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_rabbit-service.js.html#l293"><code>lib&#x2F;rabbit-service.js:293</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Logger</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method_registerActivity" class="method item">
     <h3 class="name"><code>registerActivity</code></h3>
 
@@ -632,7 +657,7 @@
             
         
         
-        <a href="../files/lib_rabbit-service.js.html#l214"><code>lib&#x2F;rabbit-service.js:214</code></a>
+        <a href="../files/lib_rabbit-service.js.html#l384"><code>lib&#x2F;rabbit-service.js:384</code></a>
         
         </p>
 
@@ -687,7 +712,7 @@
             
         
         
-        <a href="../files/lib_rabbit-service.js.html#l226"><code>lib&#x2F;rabbit-service.js:226</code></a>
+        <a href="../files/lib_rabbit-service.js.html#l396"><code>lib&#x2F;rabbit-service.js:396</code></a>
         
         </p>
 
@@ -742,7 +767,7 @@
             
         
         
-        <a href="../files/lib_rabbit-service.js.html#l238"><code>lib&#x2F;rabbit-service.js:238</code></a>
+        <a href="../files/lib_rabbit-service.js.html#l408"><code>lib&#x2F;rabbit-service.js:408</code></a>
         
         </p>
 
@@ -754,6 +779,61 @@
 
     <div class="description">
         <p>Create Job</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_validate" class="method item">
+    <h3 class="name"><code>validate</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_rabbit-service.js.html#l116"><code>lib&#x2F;rabbit-service.js:116</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Validate Settings</p>
 
     </div>
 

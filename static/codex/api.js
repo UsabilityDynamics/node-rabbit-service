@@ -1,8 +1,8 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
-        "RabbitMQ",
-        "RabbitMQ.prototype",
+        "RabbitService",
+        "RabbitService.prototype",
         "Utility"
     ],
     "modules": [],

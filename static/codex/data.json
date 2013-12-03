@@ -11,11 +11,11 @@
             "name": "lib/rabbit-service.js",
             "modules": {},
             "classes": {
-                "RabbitMQ": 1
+                "RabbitService": 1
             },
             "fors": {
-                "RabbitMQ.prototype": 1,
-                "RabbitMQ": 1
+                "RabbitService.prototype": 1,
+                "RabbitService": 1
             },
             "namespaces": {}
         },
@@ -31,9 +31,9 @@
     },
     "modules": {},
     "classes": {
-        "RabbitMQ": {
-            "name": "RabbitMQ",
-            "shortname": "RabbitMQ",
+        "RabbitService": {
+            "name": "RabbitService",
+            "shortname": "RabbitService",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -41,7 +41,7 @@
             "extension_for": [],
             "file": "lib/rabbit-service.js",
             "line": 1,
-            "description": "RabbitMQ Service Constructor\n\nEvents\n- service.exit\n- service.starting",
+            "description": "RabbitService Service Constructor\n\nEvents\n- server.exit\n- server.starting",
             "is_constructor": 1,
             "version": "3.2.0",
             "async": 1,
@@ -59,12 +59,12 @@
             ],
             "return": {
                 "description": "",
-                "type": "RabbitMQ"
+                "type": "RabbitService"
             }
         },
-        "RabbitMQ.prototype": {
-            "name": "RabbitMQ.prototype",
-            "shortname": "RabbitMQ.prototype",
+        "RabbitService.prototype": {
+            "name": "RabbitService.prototype",
+            "shortname": "RabbitService.prototype",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -81,7 +81,7 @@
             "extension_for": [],
             "file": "lib/utility.js",
             "line": 1,
-            "description": "RabbitMQ Client Utility Methods",
+            "description": "Rabbit Service utilities",
             "uses": [
                 "Abstract"
             ]
@@ -90,173 +90,190 @@
     "classitems": [
         {
             "file": "lib/rabbit-service.js",
-            "line": 134,
+            "line": 91,
             "description": "Instance Properties",
-            "class": "RabbitMQ"
+            "class": "RabbitService"
         },
         {
             "file": "lib/rabbit-service.js",
-            "line": 140,
+            "line": 97,
             "description": "Log Entry",
             "itemtype": "method",
             "name": "log",
             "uses": [
                 "winston"
             ],
-            "class": "RabbitMQ.prototype"
+            "class": "RabbitService.prototype"
         },
         {
             "file": "lib/rabbit-service.js",
-            "line": 154,
+            "line": 116,
+            "description": "Validate Settings",
+            "itemtype": "method",
+            "name": "validate",
+            "class": "RabbitService.prototype"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 207,
             "description": "Log Entry",
             "itemtype": "method",
             "name": "log",
             "uses": [
                 "winston"
             ],
-            "class": "RabbitMQ.prototype"
+            "class": "RabbitService.prototype"
         },
         {
             "file": "lib/rabbit-service.js",
-            "line": 168,
+            "line": 293,
+            "description": "Logger",
+            "itemtype": "method",
+            "name": "log",
+            "chainable": 1,
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "RabbitService.prototype"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 338,
             "description": "Debug Entry",
             "itemtype": "method",
             "name": "debug",
-            "class": "RabbitMQ.prototype"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 178,
-            "description": "Create Client",
-            "itemtype": "method",
-            "name": "createClient",
-            "class": "RabbitMQ.prototype"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 190,
-            "description": "Create Client",
-            "itemtype": "method",
-            "name": "createClient",
-            "class": "RabbitMQ.prototype"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 202,
-            "description": "Create Client",
-            "itemtype": "method",
-            "name": "createClient",
-            "class": "RabbitMQ.prototype"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 214,
-            "description": "Create Job",
-            "itemtype": "method",
-            "name": "registerActivity",
-            "class": "RabbitMQ.prototype"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 226,
-            "description": "Create Job",
-            "itemtype": "method",
-            "name": "registerActivity",
-            "class": "RabbitMQ.prototype"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 238,
-            "description": "Create Job",
-            "itemtype": "method",
-            "name": "registerActivity",
-            "class": "RabbitMQ.prototype"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 250,
-            "description": "Create Configuration Callback",
-            "itemtype": "method",
-            "name": "configure",
-            "class": "RabbitMQ.prototype"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 263,
-            "description": "Constructor Properties",
-            "class": "RabbitMQ.prototype"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 269,
-            "description": "Create Instance",
-            "itemtype": "method",
-            "name": "create",
-            "class": "RabbitMQ"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 281,
-            "description": "Constructor Debugger",
-            "itemtype": "method",
-            "name": "debug",
-            "class": "RabbitMQ"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 291,
-            "description": "Destroy Instance",
-            "itemtype": "method",
-            "name": "create",
-            "class": "RabbitMQ"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 303,
-            "description": "Utility Methods",
-            "class": "RabbitMQ"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 312,
-            "description": "Create Instance",
-            "itemtype": "method",
-            "name": "create",
-            "class": "RabbitMQ"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 324,
-            "description": "Create Generic Client",
-            "itemtype": "method",
-            "name": "createClient",
-            "class": "RabbitMQ"
-        },
-        {
-            "file": "lib/rabbit-service.js",
-            "line": 336,
-            "description": "Get Instance by PID",
-            "itemtype": "method",
-            "name": "create",
-            "class": "RabbitMQ"
+            "class": "RabbitService.prototype"
         },
         {
             "file": "lib/rabbit-service.js",
             "line": 348,
+            "description": "Create Client",
+            "itemtype": "method",
+            "name": "createClient",
+            "class": "RabbitService.prototype"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 360,
+            "description": "Create Client",
+            "itemtype": "method",
+            "name": "createClient",
+            "class": "RabbitService.prototype"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 372,
+            "description": "Create Client",
+            "itemtype": "method",
+            "name": "createClient",
+            "class": "RabbitService.prototype"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 384,
+            "description": "Create Job",
+            "itemtype": "method",
+            "name": "registerActivity",
+            "class": "RabbitService.prototype"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 396,
+            "description": "Create Job",
+            "itemtype": "method",
+            "name": "registerActivity",
+            "class": "RabbitService.prototype"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 408,
+            "description": "Create Job",
+            "itemtype": "method",
+            "name": "registerActivity",
+            "class": "RabbitService.prototype"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 420,
+            "description": "Configure Client\n\nMethod executed when connection is ready.\nUsage and semantics emulating Express.",
+            "params": [
+                {
+                    "name": "env",
+                    "description": ""
+                },
+                {
+                    "name": "fn",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "RabbitService.prototype"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 454,
+            "description": "Constructor Properties",
+            "class": "RabbitService.prototype"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 465,
+            "description": "Create Instance",
+            "itemtype": "method",
+            "name": "create",
+            "class": "RabbitService"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 477,
+            "description": "Utility Methods",
+            "class": "RabbitService"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 486,
+            "description": "Create Instance",
+            "itemtype": "method",
+            "name": "create",
+            "class": "RabbitService"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 498,
+            "description": "Create Generic Client",
+            "itemtype": "method",
+            "name": "createClient",
+            "class": "RabbitService"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 510,
+            "description": "Get Instance by PID",
+            "itemtype": "method",
+            "name": "create",
+            "class": "RabbitService"
+        },
+        {
+            "file": "lib/rabbit-service.js",
+            "line": 522,
             "description": "Schemas",
             "itemtype": "attribute",
             "name": "_schemas",
             "type": "object",
-            "class": "RabbitMQ"
+            "class": "RabbitService"
         },
         {
             "file": "lib/rabbit-service.js",
-            "line": 362,
+            "line": 536,
             "description": "Instance Map",
             "itemtype": "attribute",
             "name": "_instance",
             "type": "object",
-            "class": "RabbitMQ"
+            "class": "RabbitService"
         },
         {
             "file": "lib/utility.js",
@@ -296,19 +313,31 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
+            "line": " lib/rabbit-service.js:293"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " lib/rabbit-service.js:420"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
             "line": " lib/utility.js:15"
         },
         {
             "message": "Missing item type\nInstance Properties",
-            "line": " lib/rabbit-service.js:134"
+            "line": " lib/rabbit-service.js:91"
+        },
+        {
+            "message": "Missing item type\nConfigure Client\n\nMethod executed when connection is ready.\nUsage and semantics emulating Express.",
+            "line": " lib/rabbit-service.js:420"
         },
         {
             "message": "Missing item type\nConstructor Properties",
-            "line": " lib/rabbit-service.js:263"
+            "line": " lib/rabbit-service.js:454"
         },
         {
             "message": "Missing item type\nUtility Methods",
-            "line": " lib/rabbit-service.js:303"
+            "line": " lib/rabbit-service.js:477"
         },
         {
             "message": "Missing item type\nExtra Utility Methods",

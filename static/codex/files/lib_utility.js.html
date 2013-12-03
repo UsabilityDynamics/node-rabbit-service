@@ -41,9 +41,9 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/RabbitMQ.html">RabbitMQ</a></li>
+                <li><a href="../classes/RabbitService.html">RabbitService</a></li>
             
-                <li><a href="../classes/RabbitMQ.prototype.html">RabbitMQ.prototype</a></li>
+                <li><a href="../classes/RabbitService.prototype.html">RabbitService.prototype</a></li>
             
                 <li><a href="../classes/Utility.html">Utility</a></li>
             
@@ -91,7 +91,7 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
- * RabbitMQ Client Utility Methods
+ * Rabbit Service utilities
  *
  * @class Utility
  * @uses Abstract
@@ -127,6 +127,20 @@ Object.defineProperties( module.exports = Utility, {
     enumerable: true,
     writable: true
   },
+  trim: {
+    value: function( string ) {
+
+      if( Buffer === typeof string ) {
+        string = string.toString();
+      }
+
+      return require( &#x27;string&#x27; )( string ).trim();
+
+    },
+    configurable: false,
+    enumerable: true,
+    writable: true
+  },
   spawn: {
     value: require( &#x27;child_process&#x27; ).spawn,
     configurable: false,
@@ -145,6 +159,12 @@ Object.defineProperties( module.exports = Utility, {
     enumerable: true,
     writable: true
   },
+  omit: {
+    value: require( &#x27;lodash&#x27; ).omit,
+    configurable: false,
+    enumerable: true,
+    writable: true
+  },
   inherits: {
     value: require( &#x27;util&#x27; ).inherits,
     configurable: false,
@@ -152,7 +172,7 @@ Object.defineProperties( module.exports = Utility, {
     writable: true
   },
   settings: {
-    value: require( &#x27;object-settings&#x27; ),
+    value: require( &#x27;object-settings&#x27; ).mixin,
     configurable: false,
     enumerable: true,
     writable: true
@@ -164,7 +184,13 @@ Object.defineProperties( module.exports = Utility, {
     writable: true
   },
   emitter: {
-    value: require( &#x27;object-emitter&#x27; ),
+    value: require( &#x27;object-emitter&#x27; ).mixin,
+    configurable: false,
+    enumerable: true,
+    writable: true
+  },
+  url_parse: {
+    value: require( &#x27;url&#x27; ).parse,
     configurable: false,
     enumerable: true,
     writable: true

@@ -41,9 +41,9 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/RabbitMQ.html">RabbitMQ</a></li>
+                <li><a href="../classes/RabbitService.html">RabbitService</a></li>
             
-                <li><a href="../classes/RabbitMQ.prototype.html">RabbitMQ.prototype</a></li>
+                <li><a href="../classes/RabbitService.prototype.html">RabbitService.prototype</a></li>
             
                 <li><a href="../classes/Utility.html">Utility</a></li>
             
@@ -91,13 +91,13 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
- * RabbitMQ Service Constructor
+ * RabbitService Service Constructor
  *
  * Events
- * - service.exit
- * - service.starting
+ * - server.exit
+ * - server.starting
  *
- * @class RabbitMQ
+ * @class RabbitService
  * @constructor
  * @version 3.2.0
  * @async
@@ -105,121 +105,78 @@
  * @param settings {Object} Configuration settings.
  * @param callback {Function} Callback function.
  *
- * @returns {RabbitMQ}
+ * @returns {RabbitService}
  * @constructor
  */
-function RabbitMQ() {
-  this.debug( &#x27;Creating service with [%s].&#x27;, &#x27;function&#x27; === typeof child ? child.name : typeof child );
+function RabbitService( handler ) {
+  this.debug( &#x27;Creating service with [%s].&#x27;, &#x27;function&#x27; === typeof handler ? handler.name : typeof handler );
 
   // Make sure context is correct otherwise we could screw up the global scope.
-  if( !( this instanceof RabbitMQ ) ) {
-    return new RabbitMQ( arguments[0], arguments[1] );
+  if( !( this instanceof RabbitService ) ) {
+    return new RabbitService( handler );
   }
 
-  var path      = require( &#x27;path&#x27; );
-  var settings  = &#x27;object&#x27; === typeof arguments[0] ? arguments[0] : {};
-  var callback  = &#x27;function&#x27; === typeof arguments[1] ? arguments[1] : RabbitMQ.utility.noop;
-  var self      = this;
+  // Clone Context.
+  var context = this;
 
-  // Extend child&#x27;s prototype with RabbitMQ, Object Emitter and Object Settings
-  RabbitMQ.utility.inherits( callback, RabbitMQ );
+  // If an object is passed instead of a function.
+  if( &#x27;function&#x27; !== typeof handler ) {
+    handler = RabbitClient.utility.noop;
+  }
+
+  // Extend child&#x27;s prototype with RabbitService, Object Emitter and Object Settings
+  RabbitService.utility.inherits( handler, RabbitService );
+
+  // Mixing external prototypes.
+  RabbitService.utility.settings( handler.prototype );
+  RabbitService.utility.emitter( handler.prototype );
 
   try {
 
-    // Until the callback is instantiated we refere to its prototype
-    self = callback.prototype;
-
-    // Mixins.
-    RabbitMQ.utility.emitter.mixin( self);
-    RabbitMQ.utility.settings.mixin( self );
-
     // Instante Settings.
-    self.set({
-      settings: RabbitMQ.utility.defaults( settings, require( &#x27;../package&#x27; ).config ),
-      module_root: RabbitMQ.utility.dirname( RabbitMQ.utility.dirname( module.filename ) ),
-      distribution: &#x27;rabbitmq-3.2.0-mac&#x27;
+    handler.prototype.set({
+      settings: RabbitService.utility.omit( RabbitService.utility.defaults( handler, require( &#x27;../package&#x27; ).config ), &#x27;super_&#x27;  ),
+      directories: require( &#x27;../package&#x27; ).directories,
+      module_root: RabbitService.utility.dirname( RabbitService.utility.dirname( module.filename ) ),
+      distribution: &#x27;rabbitmq-3.2.0&#x27;
     });
 
+    // Detect ODX
+    if( process.platform === &#x27;darwin&#x27; ) {
+      handler.prototype.set( &#x27;distribution&#x27;, &#x27;rabbitmq-3.2.0-mac&#x27; );
+    }
+
     // Computed Settings.
-    self.set({
-      id: RabbitMQ.utility.hash( settings ),
-      name: [ self.get( &#x27;settings.name&#x27; ), self.get( &#x27;settings.hostname&#x27;, &#x27;localhost&#x27; ) ].join( &#x27;@&#x27; ),
+    handler.prototype.set({
+      id: process.pid,
+      name: undefined,
       bin: {
-        ctl: RabbitMQ.utility.realpath( self.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, self.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmqctl&quot; ),
-        defaults: RabbitMQ.utility.realpath( self.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, self.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmq-defaults&quot; ),
-        env: RabbitMQ.utility.realpath( self.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, self.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmq-env&quot; ),
-        plugins: RabbitMQ.utility.realpath( self.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, self.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmq-plugins&quot; ),
-        server: RabbitMQ.utility.realpath( self.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, self.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmq-server&quot; )
+        ctl: RabbitService.utility.realpath( handler.prototype.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, handler.prototype.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmqctl&quot; ),
+        defaults: RabbitService.utility.realpath( handler.prototype.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, handler.prototype.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmq-defaults&quot; ),
+        env: RabbitService.utility.realpath( handler.prototype.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, handler.prototype.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmq-env&quot; ),
+        plugins: RabbitService.utility.realpath( handler.prototype.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, handler.prototype.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmq-plugins&quot; ),
+        server: RabbitService.utility.realpath( handler.prototype.get( &#x27;module_root&#x27; ), &#x27;vendor&#x27;, handler.prototype.get( &#x27;distribution&#x27; ), &quot;sbin/rabbitmq-server&quot; )
       }
     });
 
-    // Compute absolute paths to directories
-    RabbitMQ.utility.each( self.get( &#x27;settings.directories&#x27; ), function( value, key ) {
-      self.set( &#x27;settings.directories.&#x27; + key, RabbitMQ.utility.realpath( value ) || RabbitMQ.utility.absolute_path( &#x27;../.dynamic/&#x27; + key, self.get( &#x27;module_root&#x27; ) ) )
-    });
+    // Instantaite the handler
+    context = new handler( null, context );
 
-    // Compute absolute paths to directories
-    RabbitMQ.utility.each( self.get( &#x27;settings.bin&#x27; ), function( value, key ) {
-      self.set( &#x27;settings.bin.&#x27; + key, RabbitMQ.utility.realpath( value ) || RabbitMQ.utility.absolute_path( &#x27;../.dynamic/&#x27; + key, self.get( &#x27;module_root&#x27; ) ) )
-    });
+    // Validate Settings.
+    context.validate();
 
-    // Validate Settings
-    self.set( &#x27;validation&#x27;, RabbitMQ.utility.validate( self.get( &#x27;settings&#x27; ), RabbitMQ._schemas.service ) );
-
-    // Validate Settings
-    if( !self.get( &#x27;validation&#x27; ).is_valid ) {
-      throw new Error( &#x27;Validation Failure: &#x27; + validation.errors.join() );
-    }
-
-    // Instantaite the callback
-    self = new callback( null, self );
-
-    // Spawn RabbitMQ Server Process.
-    self.process = RabbitMQ.utility.spawn( self.get( &#x27;bin.server&#x27; ), [ &quot;_detached&quot; ], {
-      cwd: process.cwd(),
-      env: RabbitMQ.utility.extend( {}, process.env, {
-        RABBITMQ_CONFIG_FILE: self.get( &#x27;settings.directories.config&#x27; ) + &#x27;/rabbitmq&#x27;,
-        RABBITMQ_PID_FILE: self.get( &#x27;settings.directories.pid&#x27; ) + &#x27;/rabbitmq&#x27;,
-        RABBITMQ_MNESIA_DIR: self.get( &#x27;settings.directories.cache&#x27; ),
-        RABBITMQ_NODE_PORT: self.get( &#x27;settings.port&#x27; ),
-        RABBITMQ_NODE_IP_ADDRESS: self.get( &#x27;settings.host&#x27; ),
-        RABBITMQ_NODENAME: self.get( &#x27;name&#x27; ),
-        RABBITMQ_LOG_BASE: self.get( &#x27;settings.directories.logs&#x27; )
-      }),
-      detached: false
-    });
-
-    // Update settings after process spawned.
-    self.set( &#x27;process&#x27;, RabbitMQ.utility.pick( self.process, &#x27;pid&#x27;, &#x27;connected&#x27; ) );
-
-    self.process.on( &#x27;exit&#x27;, function() {
-      self.emit( &#x27;service.exit&#x27;, arguments );
-    });
-
-    // Try to parse JSON, Output Data
-    self.process.stdout.on( &#x27;data&#x27;, function( data ) {
-      self.log( &#x27;DATA:&#x27;, data.toString() );
-    });
-
-    // Try to parse JSON, Output Error
-    self.process.stderr.on( &#x27;data&#x27;, function( data ) {
-      self.log( &#x27;ERROR:&#x27;, data.toString() );
-    });
-
-    process.nextTick( function() {
-      self.emit( &#x27;service.starting&#x27; );
-    });
+    // Spawn Process.
+    context.spawn();
 
     // Save instance.
-    RabbitMQ._instance[ self.get( &#x27;settings.name&#x27; ) ] = self;
+    RabbitService._instance[ context.get( &#x27;settings.name&#x27; ) ] = context;
 
   } catch( error ) {
-    console.error( error.message );
-    return self;
+      return new handler( error, RabbitService ).error( error );
   }
 
   // @chainable
-  return self;
+  return context;
 
 }
 
@@ -227,43 +184,256 @@ function RabbitMQ() {
  * Instance Properties
  *
  */
-Object.defineProperties( RabbitMQ.prototype, {
+Object.defineProperties( RabbitService.prototype, {
   stop: {
     /**
      * Log Entry
      *
      * @method log
      * @uses winston
-     * @for RabbitMQ.prototype
+     * @for RabbitService.prototype
      */
     value: function log() {
       this.debug( &#x27;Stopping Service [%s].&#x27;, this.get( &#x27;process.pid&#x27; ) );
+
       process.kill( this.get( &#x27;process.pid&#x27; ), &#x27;SIGHUP&#x27; );
+
+      // @chainable
+      return this;
+
     },
     enumerable: true
   },
-  log: {
+  validate: {
+    /**
+     * Validate Settings
+     *
+     * @method validate
+     * @for RabbitService.prototype
+     */
+    value: function validate() {
+      this.debug( &#x27;Validating Service [%s].&#x27;, this.get( &#x27;settings.name&#x27; ) );
+
+      var self = this;
+
+      // Compute absolute paths to directories
+      RabbitService.utility.each( this.get( &#x27;directories&#x27; ), function( value, key ) {
+
+        if( require( &#x27;path&#x27; ).resolve( require( &#x27;path&#x27; ).join( self.get( &#x27;module_root&#x27; ), &#x27;../.dynamic&#x27;, key  ) ) ) {
+          self.set( &#x27;directories.&#x27; + key, require( &#x27;path&#x27; ).resolve( require( &#x27;path&#x27; ).join( self.get( &#x27;module_root&#x27; ), value  ) ) )
+        } else {
+          self.set( &#x27;directories.&#x27; + key, require( &#x27;path&#x27; ).join( &#x27;~&#x27;, value ) )
+        }
+
+      });
+
+      // Compute absolute paths to directories
+      RabbitService.utility.each( self.get( &#x27;settings.bin&#x27; ), function( value, key ) {
+        self.set( &#x27;settings.bin.&#x27; + key, RabbitService.utility.realpath( value ) || RabbitService.utility.absolute_path( &#x27;../.dynamic/&#x27; + key, self.get( &#x27;module_root&#x27; ) ) )
+      });
+
+      // Convert URL to Keys
+      if( this.get( &#x27;settings.url&#x27; ) || process.env.RABBIT_URL ) {
+
+        var _parse = RabbitService.utility.url_parse( this.get( &#x27;settings.url&#x27; ) || process.env.RABBIT_URL );
+
+        this.set( &#x27;settings&#x27;, RabbitService.utility.defaults( this.get( &#x27;settings&#x27; ), {
+          host: _parse.hostname,
+          port: _parse.port,
+          login: _parse.auth ? _parse.auth.split( &#x27;:&#x27; )[0] : &#x27;&#x27;,
+          password: _parse.auth ? _parse.auth.split( &#x27;:&#x27; )[1] : &#x27;&#x27;,
+          vhost: _parse.pathname || &#x27;/&#x27;
+        }));
+
+      }
+
+      // Set Host
+      if( !this.get( &#x27;settings.host&#x27; ) ) {
+        this.set( &#x27;settings.host&#x27;, process.env.RABBIT_HOST );
+      }
+
+      // Set Port
+      if( !this.get( &#x27;settings.port&#x27; ) ) {
+        this.set( &#x27;settings.port&#x27;, process.env.RABBIT_PORT );
+      }
+
+      this.set( &#x27;name&#x27;, [ this.get( &#x27;settings.name&#x27; ), this.get( &#x27;settings.hostname&#x27;, &#x27;localhost&#x27; ) ].join( &#x27;@&#x27; ) );
+
+      // Validate Settings
+      self.set( &#x27;validation&#x27;, RabbitService.utility.validate( self.get( &#x27;settings&#x27; ), RabbitService._schemas.service ) );
+
+      // Prepare spawn environment.
+      this.set( &#x27;environment&#x27;, {
+        RABBITMQ_NODE_IP_ADDRESS: this.get( &#x27;settings.host&#x27; ),
+        RABBITMQ_NODE_PORT: this.get( &#x27;settings.port&#x27; ),
+        RABBITMQ_NODENAME: this.get( &#x27;name&#x27; ),
+        RABBITMQ_SERVICENAME: this.get( &#x27;name&#x27; ),
+        // RABBITMQ_CONSOLE_LOG: &#x27;new&#x27;,
+        // RABBITMQ_CTL_ERL_ARGS: &#x27;&#x27;,
+        // RABBITMQ_SERVER_ERL_ARGS: &#x27;&#x27;,
+        // RABBITMQ_SERVER_START_ARGS: &#x27;&#x27;,
+        RABBITMQ_BASE: this.get( &#x27;directories.dynamic&#x27; ) + &#x27;&#x27;,
+        // RABBITMQ_CONFIG_FILE: this.get( &#x27;directories.config&#x27; ), // etc/rabbitmq/rabbitmq
+        RABBITMQ_MNESIA_BASE: this.get( &#x27;directories.cache&#x27; ),
+        RABBITMQ_MNESIA_DIR: this.get( &#x27;directories.cache&#x27; ),
+        RABBITMQ_LOG_BASE: this.get( &#x27;directories.log&#x27; ), // /var/log/rabbitmq
+        //RABBITMQ_SASL_LOGS: this.get( &#x27;directories.logs&#x27; ) + &#x27;&#x27;,
+        //RABBITMQ_PLUGINS_DIR: this.get( &#x27;directories.logs&#x27; ) + &#x27;/server-log.log&#x27;,
+        //RABBITMQ_PLUGINS_EXPAND_DIR: this.get( &#x27;directories.logs&#x27; ) + &#x27;/server-log.log&#x27;,
+        //RABBITMQ_ENABLED_PLUGINS_FILE: this.get( &#x27;directories.logs&#x27; ) + &#x27;/server-log.log&#x27;,
+        RABBITMQ_PID_FILE: this.get( &#x27;directories.pid&#x27; ) + &#x27;/rabbitmq&#x27;
+      });
+
+      // Validate Settings
+      if( !this.get( &#x27;validation.is_valid&#x27; ) ) {
+        throw new Error( &#x27;Validation Failure: &#x27; + this.get( &#x27;validation.errors&#x27; ) );
+      }
+
+      // @chainable
+      return this;
+
+    },
+    enumerable: true
+  },
+  spawn: {
     /**
      * Log Entry
      *
      * @method log
      * @uses winston
-     * @for RabbitMQ.prototype
+     * @for RabbitService.prototype
      */
-    value: function log() {
-      return console.log.apply( console, arguments );
-      return require( &#x27;winston&#x27; ).log.apply( null, arguments )
+    value: function spawn() {
+      this.debug( &#x27;Spawning Service [%s].&#x27;, this.get( &#x27;settings.name&#x27; ) );
+
+      var context = this;
+
+      // Already spawned.
+      if( context.process ) {
+        return context.process;
+      }
+
+      // Spawn RabbitService Server Process.
+      context.process = RabbitService.utility.spawn( context.get( &#x27;bin.server&#x27; ), [ &quot;__detached&quot; ], {
+        cwd: context.get( &#x27;directories.dynamic&#x27; ),
+        env: RabbitService.utility.defaults( context.get( &#x27;environment&#x27; ), process.env ),
+        detached: false
+      });
+
+      // Update settings after process spawned.
+      context.set( &#x27;process&#x27;, RabbitService.utility.pick( context.process, &#x27;pid&#x27;, &#x27;connected&#x27; ) );
+
+      // If RabbitMQ Server is shut off externally, we may need to renable it.
+      context.process.on( &#x27;exit&#x27;, function( code ) {
+        context.debug( &#x27;Server exit event [%s].&#x27;, code );
+
+        context.emit( &#x27;server.exit&#x27;, arguments );
+
+        setTimeout( function() {
+          context.debug( &#x27;RabbitMQ Server killed. Quitting....&#x27; );
+        }, 5000 )
+
+      });
+
+      // Try to parse JSON, Output Data
+      context.process.stdout.on( &#x27;data&#x27;, function() {
+        var data = RabbitService.utility.trim( arguments[0] );
+        var match;
+
+        if( match = data.match( /(completed with ([&lt;plugins&gt;\d]) plugins.)/i ) ) {
+
+          // Extracted plugin count.
+          context.set( &#x27;plugins&#x27;, match[2] );
+
+          return context.emit( &#x27;server.ready&#x27;, null, {
+            plugins: context.get( &#x27;plugins&#x27; ),
+            pid: context.get( &#x27;process.pid&#x27; )
+          });
+
+        }
+
+        // Unmatched string.
+        context.emit( &#x27;server.info&#x27;, null, data );
+
+      });
+
+      // Try to parse JSON, Output Error
+      context.process.stderr.on( &#x27;data&#x27;, function( data ) {
+        data = RabbitService.utility.trim( data );
+        context.debug( &#x27;Server error: [%s].&#x27;, data );
+        context.emit( &#x27;server.error&#x27;, new Error( data ) );
+      });
+
+      // Spawn error.
+      context.process.on( &#x27;error&#x27;, function error( error ) {
+        context.debug( &#x27;Server spawn error: [%s].&#x27;, error.message );
+
+        // Can not locate a file.
+        if( error.code === &#x27;ENOENT&#x27; ) {}
+
+        context.emit( &#x27;server.error&#x27;, error );
+
+      });
+
+      // @chainable
+      return this;
+
     },
     enumerable: true
+  },
+  log: {
+    /**
+     * Logger
+     *
+     * @method log
+     * @chainable
+     * @returns {*}
+     */
+    value: function log() {
+
+      // @todo Replace with winston
+      console.log.apply( console, arguments );
+
+      // @chainable
+      return this
+
+    },
+    enumerable: false,
+    writable: true
+  },
+  error: {
+    value: function error( error ) {
+
+      if( &#x27;string&#x27; === typeof error ) {
+        error = new Error( error );
+      }
+
+      // Debug error.
+      this.debug( error );
+
+      // Log error.
+      this.log( &quot;Rabbit Service Error: [%s][%s]&quot;, error.message, error.code );
+
+      // Emit error.
+      if( this.emit ) {
+        this.emit( &#x27;error&#x27;, error );
+      }
+
+      // @chainable
+      return this;
+
+    },
+    enumerable: false,
+    writable: true
   },
   debug: {
     /**
      * Debug Entry
      *
      * @method debug
-     * @for RabbitMQ.prototype
+     * @for RabbitService.prototype
      */
-    value: require( &#x27;debug&#x27; )( &#x27;rabbitmq:lient&#x27; ),
+    value: require( &#x27;debug&#x27; )( &#x27;rabbit:service&#x27; ),
     enumerable: true
   },
   createProducer: {
@@ -271,7 +441,7 @@ Object.defineProperties( RabbitMQ.prototype, {
      * Create Client
      *
      * @method createClient
-     * @for RabbitMQ.prototype
+     * @for RabbitService.prototype
      */
     value: function createClient() {
 
@@ -283,7 +453,7 @@ Object.defineProperties( RabbitMQ.prototype, {
      * Create Client
      *
      * @method createClient
-     * @for RabbitMQ.prototype
+     * @for RabbitService.prototype
      */
     value: function createClient() {
 
@@ -295,7 +465,7 @@ Object.defineProperties( RabbitMQ.prototype, {
      * Create Client
      *
      * @method createClient
-     * @for RabbitMQ.prototype
+     * @for RabbitService.prototype
      */
     value: function createClient() {
 
@@ -307,7 +477,7 @@ Object.defineProperties( RabbitMQ.prototype, {
      * Create Job
      *
      * @method registerActivity
-     * @for RabbitMQ.prototype
+     * @for RabbitService.prototype
      */
     value: function registerActivity() {
 
@@ -319,7 +489,7 @@ Object.defineProperties( RabbitMQ.prototype, {
      * Create Job
      *
      * @method registerActivity
-     * @for RabbitMQ.prototype
+     * @for RabbitService.prototype
      */
     value: function registerActivity() {
 
@@ -331,7 +501,7 @@ Object.defineProperties( RabbitMQ.prototype, {
      * Create Job
      *
      * @method registerActivity
-     * @for RabbitMQ.prototype
+     * @for RabbitService.prototype
      */
     value: function registerActivity() {
 
@@ -340,15 +510,36 @@ Object.defineProperties( RabbitMQ.prototype, {
   },
   configure: {
     /**
-     * Create Configuration Callback
+     * Configure Client
      *
-     * @method configure
-     * @for RabbitMQ.prototype
+     * Method executed when connection is ready.
+     * Usage and semantics emulating Express.
+     *
+     * @param env
+     * @param fn
+     * @returns {*}
      */
-    value: function configure( callback ) {
-      this.on( &#x27;ready&#x27;, callback );
+    value: function configure( env, fn ) {
+      var self = this;
+      var envs = &#x27;all&#x27;;
+      var args = [].slice.call( arguments );
+
+      fn = args.pop();
+
+      if( args.length ) {
+        envs = args;
+      }
+
+      if( &#x27;all&#x27; == envs || ~envs.indexOf( this.get( &#x27;settings.environment&#x27; ) ) ) {
+        self.on( &#x27;ready&#x27;, fn.bind( this, this ) );
+      }
+
+      // @chainable
+      return this;
+
     },
-    enumerable: true
+    enumerable: true,
+    writable: false
   }
 });
 
@@ -356,46 +547,29 @@ Object.defineProperties( RabbitMQ.prototype, {
  * Constructor Properties
  *
  */
-Object.defineProperties( module.exports = RabbitMQ, {
+Object.defineProperties( module.exports = RabbitService, {
+  version: {
+    value: require( &#x27;../package.json&#x27; ).version,
+    enumerable: false,
+    writable: false
+  },
   create: {
     /**
      * Create Instance
      *
      * @method create
-     * @for RabbitMQ
+     * @for RabbitService
      */
-    value: function create( settings, callback ) {
-      return new RabbitMQ( settings, callback );
+    value: function create( handler ) {
+      return new RabbitService( handler );
     },
     enumerable: false
-  },
-  debug: {
-    /**
-     * Constructor Debugger
-     *
-     * @method debug
-     * @for RabbitMQ
-     */
-    value: require( &#x27;debug&#x27; )( &#x27;rabbitmq:constructor&#x27; ),
-    enumerable: true
-  },
-  destroy: {
-    /**
-     * Destroy Instance
-     *
-     * @method create
-     * @for RabbitMQ
-     */
-    value: function destroy( pid ) {
-      RabbitMQ.debug( &#x27;destroy [%s]&#x27;, pid );
-    },
-    enumerable: true
   },
   utility: {
     /**
      * Utility Methods
      *
-     * @for RabbitMQ
+     * @for RabbitService
      */
     value: require( &#x27;./utility&#x27; ),
     enumerable: false
@@ -405,10 +579,10 @@ Object.defineProperties( module.exports = RabbitMQ, {
      * Create Instance
      *
      * @method create
-     * @for RabbitMQ
+     * @for RabbitService
      */
     get: function startService() {
-      return RabbitMQ.create;
+      return RabbitService.create;
     },
     enumerable: true
   },
@@ -417,10 +591,10 @@ Object.defineProperties( module.exports = RabbitMQ, {
      * Create Generic Client
      *
      * @method createClient
-     * @for RabbitMQ
+     * @for RabbitService
      */
-    value: function createClient( settings, callback ) {
-      console.log( &#x27;asdf&#x27; );
+    get: function startService() {
+      return require( &#x27;rabbit-client&#x27; ).create;
     },
     enumerable: true
   },
@@ -429,10 +603,10 @@ Object.defineProperties( module.exports = RabbitMQ, {
      * Get Instance by PID
      *
      * @method create
-     * @for RabbitMQ
+     * @for RabbitService
      */
     value: function getInstance( pid ) {
-      return RabbitMQ.__instances ? RabbitMQ.__instances[ pid ] : null;
+      return RabbitService._instances ? RabbitService._instances[ pid ] : null;
     },
     enumerable: false
   },
