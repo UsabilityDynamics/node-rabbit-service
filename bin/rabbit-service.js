@@ -12,7 +12,9 @@ module.commander
   .command( 'start' ).description( 'start Rabbit service' )
   .option( '-n, --name <name>', 'set name', 'rabbit-service' )
   .option( '-c, --cluster <cluster>', 'set cluster', 'rabbit-cluster' )
-  .option( '-u, --url <url>', 'service MQ URI.', 'amqp://localhost:5672/' )
+  .option( '-p, --port <port>', 'AMQP port', process.env.RABBIT_PORT || 5672 )
+  .option( '-h, --host <port>', 'AMQP host', process.env.RABBIT_HOST || '127.0.0.1' )
+  .option( '-u, --url <url>', 'service MQ URI.', process.env.RABBIT_URL || 'amqp://127.0.0.1:5672/' )
   .option( '-m, --management <management>', 'service management URL.', 'localhost:15672' )
   .action( function( options ) {
 
@@ -24,6 +26,8 @@ module.commander
       this.set( 'settings.environment', process.env.NODE_ENV || 'production' );
       this.set( 'settings.cluster', options.cluster );
       this.set( 'settings.url', options.url );
+      this.set( 'settings.port', options.port );
+      this.set( 'settings.host', options.host );
 
       // Triggered on errors
       this.on( 'server.error', function error_handler( error ) {
