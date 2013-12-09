@@ -10,13 +10,13 @@ module.exports = {
     // Record module loading time
     "can load module": function() {
       this.timeout( 150 );
-      require( '../' );
+      require( '.' );
     },
 
     // Check Module Structure
     "has expected methods.": function() {
 
-      var client = require( '../' );
+      var client = require( '.' );
 
       // Constructor Methods
       client.should.have.ownProperty( 'debug' );

@@ -48,7 +48,7 @@ module.exports = {
 
       }
 
-      var service = require( '../' ).startService({
+      var service = require( '.' ).startService({
         "name": "rabbit-test",
         "port": 1300,
         "default_vhost": "/test"

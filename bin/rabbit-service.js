@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-module.rabbit     = require( '../' );
+module.rabbit     = require( '.' );
 module.commander  = require( 'commander' );
 
 module.commander

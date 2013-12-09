@@ -6,7 +6,7 @@
  */
 
 var express   = require( 'express' );
-var Rabbit    = require( '../' );
+var Rabbit    = require( '.' );
 var app = express();
 
 app.configure( function configure() {
