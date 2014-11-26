@@ -16,12 +16,12 @@ forever start rabbit-service start --name my-rabbit --url amqp://localhost:9000
 ```
 
 ## Getting Started
-Install the module with: `npm install rabbitmq-client -g`
+Install the module with: `npm install rabbit-service -g`
 
 ```javascript
 
 // Start Service using default settings
-require( 'rabbitmq-client' ).create( function Service() {
+require( 'rabbit-service' ).create( function Service() {
   this.log( 'RabbitMQ Service starting.' );
 
   // Triggered on errors
